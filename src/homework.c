@@ -173,11 +173,10 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 			}
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
-						theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
-						+ gamma * tau[i] * tau[j];
+                    theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
+						//+ gamma * tau[i] * tau[j];
 				}
-				if(present!=0.0)
-                theSystem->B[map[i]] +=  gamma * tau[i]*present;
+                theSystem->B[map[i]] +=  gamma * tau[i] * present;
 			}
 		}
 	}
