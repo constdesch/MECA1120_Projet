@@ -20,8 +20,8 @@ int main(void)
 	femPoissonProblem* theProblemU = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
     femPoissonProblem* theProblemV = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
 
-	femPoissonSolve(theProblemU);
-    femPoissonSolve(theProblemV);
+	femPoissonSolve(theProblemU,0);
+    femPoissonSolve(theProblemV,1);
     
     int i;
     double *B = malloc(sizeof(double) * theProblemU->system->size);
@@ -31,7 +31,6 @@ int main(void)
         B[i] = sqrt(B1[i]*B1[i] + B2[i]*B2[i]);
     }
     
-    int    vext      = 3;
     int    n = 15;
     double radius    = 0.1;
     double mass      = 0.1;

@@ -52,7 +52,7 @@ void femMeshLocal(const femMesh *theMesh, const int iElem, int *map, double *x, 
 # endif
 # ifndef NOPOISSONSOLVE
 
-void femPoissonSolve(femPoissonProblem *theProblem)
+void femPoissonSolve(femPoissonProblem *theProblem, int flag)
 {
 	femMesh *theMesh = theProblem->mesh;
 	femEdges *theEdges = theProblem->edges;
@@ -96,10 +96,10 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 			}
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
-					theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
-                    + gamma * tau[i] * tau[j];
+                    theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
+                    //+ gamma * tau[i] * tau[j];
 				}
-                theSystem->B[map[i]] += gamma * tau[i] * tau[j];
+                theSystem->B[map[i]] += weight * jac * phi[i]; //gamma * tau[i];
 			}
 		}
 	}
@@ -107,11 +107,23 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 	for (iEdge = 0; iEdge < theEdges->nEdge; iEdge++) {
 		if (theEdges->edges[iEdge].elem[1] < 0) {
 			for (i = 0; i < 2; i++) {
+                double radiusOut = 2.0;
+                double radiusIn = 0.4;
 				int iNode = theEdges->edges[iEdge].node[i];
 				double xloc = theMesh->X[iNode];
 				double yloc = theMesh->Y[iNode];
-                if (xloc * xloc + yloc*yloc <= 0.4*0.4) femFullSystemConstrain(theSystem, iNode, 0.0);
-                else femFullSystemConstrain(theSystem, iNode, 3.0);
+                if (xloc * xloc + yloc*yloc <= radiusIn*radiusIn) femFullSystemConstrain(theSystem, iNode, 0.0);
+                else {
+                    double vext = 3.0;
+                    if (flag == 0){
+                        double vx = vext * yloc / radiusOut;
+                        femFullSystemConstrain(theSystem, iNode, vx);
+                    }
+                    if (flag == 1){
+                        double vy = -vext * xloc/radiusOut;
+                        femFullSystemConstrain(theSystem, iNode, vy);
+                    }
+                }
 			}
 		}
 	}

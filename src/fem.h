@@ -105,7 +105,7 @@ void                 femFullSystemConstrain(femFullSystem* mySystem, int myNode,
 
 femPoissonProblem   *femPoissonCreate(const char *filename);
 void                 femPoissonFree(femPoissonProblem *theProblem);
-void                 femPoissonSolve(femPoissonProblem *theProblem);
+void                 femPoissonSolve(femPoissonProblem *theProblem, int flag);
 
 
 typedef struct {
