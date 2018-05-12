@@ -22,6 +22,7 @@ femPoissonProblem *femPoissonCreate(const char *filename)
 {
 	femPoissonProblem *theProblem = malloc(sizeof(femPoissonProblem));
 	theProblem->mesh = femMeshRead(filename);
+    area(theProblem);
 	femMeshClean(theProblem->mesh);
 	theProblem->edges = femEdgesCreate(theProblem->mesh);
 	if (theProblem->mesh->nLocalNode == 4) {

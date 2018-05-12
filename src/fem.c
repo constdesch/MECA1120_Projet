@@ -207,6 +207,7 @@ void femMeshFree(femMesh *theMesh)
 {
 	free(theMesh->X);
 	free(theMesh->Y);
+    free(theMesh->area);
 	free(theMesh->elem);
 	free(theMesh);
 }
@@ -483,7 +484,7 @@ femGrains *femGrainsCreateSimple(int n, double r, double m, double radiusIn, dou
     theGrains->gravity[1] = -9.81;
     theGrains->gamma = 0.5;
     
-       
+    theGrains->elem = malloc(n*sizeof(int)); /* Tableau d'appartenance a un element */
     theGrains->x  = malloc(n*sizeof(double));
     theGrains->y  = malloc(n*sizeof(double));
     theGrains->vx = malloc(n*sizeof(double));
@@ -550,6 +551,7 @@ femGrains *femGrainsCreateTiny(double radiusIn, double radiusOut)
 
 void femGrainsFree(femGrains *theGrains)
 {
+    free(theGrains->elem);
     free(theGrains->x);
     free(theGrains->y);
     free(theGrains->vx);

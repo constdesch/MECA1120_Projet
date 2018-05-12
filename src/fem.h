@@ -117,6 +117,7 @@ typedef struct {
     double gamma;
     double *x;
     double *y;
+    int *elem; /*tableau d'appartenance a un element*/ 
     double *vx;
     double *vy;
     double *r;
