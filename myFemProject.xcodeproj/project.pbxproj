@@ -1,0 +1,1173 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		10510D0D9CA54D0DA06DB851 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7E84EFE6B89C4148A5F3FEEC /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				742F4F1A318C448BB0570271 /* CMake Rules */,
+			);
+			dependencies = (
+				B462385A0941461097800B0B /* PBXTargetDependency */,
+				54B009AA2BA943B7B076B948 /* PBXTargetDependency */,
+				C6FCB17232604AD695C5091C /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		651CD93576294EB5BAB87948 /* run */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 88B7D72C76754F509F5F1C45 /* Build configuration list for PBXAggregateTarget "run" */;
+			buildPhases = (
+				73DDAADCF28C419C9758E3CB /* CMake Rules */,
+			);
+			dependencies = (
+				E4517D2828234599AE7FC099 /* PBXTargetDependency */,
+				8841C47B80964AD5B0117EF3 /* PBXTargetDependency */,
+			);
+			name = run;
+			productName = run;
+		};
+		6D78535E623A4153AF748773 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 44420EFD8972410A92DE96F6 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				E148148C1F6A49EDAC11AEA4 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0674FDD0258340079EF0FFEE /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.h */ = {isa = PBXBuildFile; fileRef = FABF638450F24669A4551DC7 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.h */; };
+		0EF496E5397B4FAEAF5B1B02 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.h */ = {isa = PBXBuildFile; fileRef = 0E3912DCA8E14C9CA5A0FC2C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.h */; };
+		1E41AC37DE7B44EF9B111543 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/context.c */ = {isa = PBXBuildFile; fileRef = E5A80CDFE5984CAD8DA86607 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/context.c */; settings = {COMPILER_FLAGS = "-Wdeclaration-after-statement"; }; };
+		2182F97EBD6C498FB0929BE1 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/glfem.c */ = {isa = PBXBuildFile; fileRef = 3990EC32BAC64F91A5EC6280 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/glfem.c */; };
+		34CEFBDA6EED4D2882B91D03 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.h */ = {isa = PBXBuildFile; fileRef = 15F98D78BA0142098577BC4F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.h */; };
+		42AB32B95363456F99A3BB91 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 544DE1E5C6224D3084B62551 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/CMakeLists.txt */; };
+		4775B13D4BC349B3997C9A75 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3.h */ = {isa = PBXBuildFile; fileRef = 1DC8CF5D668E448695CA4E3B /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3.h */; };
+		529BFAD3D6AC4848A785354D /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/monitor.c */ = {isa = PBXBuildFile; fileRef = 09FBE5A122A34987B97E2A31 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/monitor.c */; settings = {COMPILER_FLAGS = "-Wdeclaration-after-statement"; }; };
+		537B5CED623742EE9FB59E8F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3native.h */ = {isa = PBXBuildFile; fileRef = B587C97C673345F99FBB114F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3native.h */; };
+		5383D19F974848BEA347BC18 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.c */ = {isa = PBXBuildFile; fileRef = 19E3DDA4A8D1427BA00408B4 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.c */; };
+		53FE205252AC44AD85AE34EC /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/glfw_config.h */ = {isa = PBXBuildFile; fileRef = 4F3FF6089EA84520B7EF1231 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/glfw_config.h */; };
+		5BEF77FFC12F4D2D878517F9 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.h */ = {isa = PBXBuildFile; fileRef = 4D815D62418A44EF99374106 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.h */; };
+		75D470368E474E239AB6EA37 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.c */ = {isa = PBXBuildFile; fileRef = FE308B753F47447DBFE4CB66 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.c */; };
+		8408E18D18B847D7A6C3275A /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/init.c */ = {isa = PBXBuildFile; fileRef = 72C69A7649474B799F44ECE8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/init.c */; settings = {COMPILER_FLAGS = "-Wdeclaration-after-statement"; }; };
+		899CEF1125B645B5822AD1CB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_monitor.m */ = {isa = PBXBuildFile; fileRef = 4CB05542BB134E06826F43F8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_monitor.m */; };
+		8AEB9A9BCD64437A89090B58 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/main.c */ = {isa = PBXBuildFile; fileRef = BB46F146EC15403291D59384 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/main.c */; };
+		9229AA29AD744B75830D4D36 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_time.c */ = {isa = PBXBuildFile; fileRef = 83C41E16537A4426B0D6A322 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_time.c */; };
+		99E06E1DD5624CC1B385D0AB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.m */ = {isa = PBXBuildFile; fileRef = 3AE0E57FFC5A4F79A8145498 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.m */; };
+		A0B227CFA719470A8DD88A29 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_window.m */ = {isa = PBXBuildFile; fileRef = 1BA95C0803394CCBABC47073 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_window.m */; };
+		A26E746DF1A542B2A66444B8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.m */ = {isa = PBXBuildFile; fileRef = 55094E2099B041A29D94854C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.m */; };
+		A394FC0FC218482A8D863818 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/window.c */ = {isa = PBXBuildFile; fileRef = C0954A4180284BD39C1C6F68 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/window.c */; settings = {COMPILER_FLAGS = "-Wdeclaration-after-statement"; }; };
+		A3FFD1F7FF964379980034A6 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/internal.h */ = {isa = PBXBuildFile; fileRef = B8AFD30DB5934C3A85EA68FC /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/internal.h */; };
+		A58324764FC44AD9B730C758 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_init.m */ = {isa = PBXBuildFile; fileRef = 595FB8A6A8CD4BDAB7DF3973 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_init.m */; };
+		AEF17A2114984F69A9A95F11 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/mappings.h */ = {isa = PBXBuildFile; fileRef = 6602DA8F97184C478D8CF16E /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/mappings.h */; };
+		B58C4ABC10FE4DB2887600E5 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/homework.c */ = {isa = PBXBuildFile; fileRef = 03346D37964442A285B1F377 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/homework.c */; };
+		BB0A3C87B96145FAAB6C48E1 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/vulkan.c */ = {isa = PBXBuildFile; fileRef = 108889654E9E495587EBA4DF /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/vulkan.c */; settings = {COMPILER_FLAGS = "-Wdeclaration-after-statement"; }; };
+		BEA900AB5F6841D59D396E2C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/fem.c */ = {isa = PBXBuildFile; fileRef = 1183BA08AA934A30B1E5E42F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/fem.c */; };
+		BFDD32A974D246C3979AA9CA /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = E28779D78E9447C0AD0F05ED /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */; };
+		CA966CE2C3C04D6E8D339B70 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_platform.h */ = {isa = PBXBuildFile; fileRef = 2C283B2BECB94D8CA07F1B60 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_platform.h */; };
+		CEA0B81DEBA84744992F8E80 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/input.c */ = {isa = PBXBuildFile; fileRef = 4EBECD83D5864C91AA4C47FB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/input.c */; settings = {COMPILER_FLAGS = "-Wdeclaration-after-statement"; }; };
+		E2067EC05E3345C59F38E8A1 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.c */ = {isa = PBXBuildFile; fileRef = 2526EFFFAC9B4641889A46F5 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.c */; };
+		FEC8C522FB1346F1977F56FA /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.h */ = {isa = PBXBuildFile; fileRef = E247692A2CAE4CCD8E666CDB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4C20EAB097FC4F57A0CFE10C /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		89238CA829414E84B1AE43F0 /* MinSizeRel */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = MinSizeRel;
+		};
+		ABEBDEB426204386A27EF1AB /* RelWithDebInfo */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = RelWithDebInfo;
+		};
+		AC23BD3B9F8E4CABAF35682B /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		21BFCB59EC1C4E9295D058CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCA56C902AB04CF59192F826;
+			remoteInfo = myFem;
+		};
+		5B31241CF48349208DD33094 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 689BFCF029404EFFA6E6C7D5;
+			remoteInfo = glfw;
+		};
+		702C6CD9042B4AF4894942E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCA56C902AB04CF59192F826;
+			remoteInfo = myFem;
+		};
+		9EEF4877DE38459ABCB1AD4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D78535E623A4153AF748773;
+			remoteInfo = ZERO_CHECK;
+		};
+		A3F8820BCE74433F802E431F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D78535E623A4153AF748773;
+			remoteInfo = ZERO_CHECK;
+		};
+		A7F3CE885ED74950B33201A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 689BFCF029404EFFA6E6C7D5;
+			remoteInfo = glfw;
+		};
+		A96AC237EADA476185063483 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D78535E623A4153AF748773;
+			remoteInfo = ZERO_CHECK;
+		};
+		B7E5123B74784B67A8C3BD00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 539CBEBECD7740D3B54209D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D78535E623A4153AF748773;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03346D37964442A285B1F377 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/homework.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = homework.c; path = src/homework.c; sourceTree = SOURCE_ROOT; };
+		09FBE5A122A34987B97E2A31 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/monitor.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = monitor.c; path = "glfw-3.2.1/src/monitor.c"; sourceTree = SOURCE_ROOT; };
+		0E3912DCA8E14C9CA5A0FC2C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = osmesa_context.h; path = "glfw-3.2.1/src/osmesa_context.h"; sourceTree = SOURCE_ROOT; };
+		108889654E9E495587EBA4DF /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/vulkan.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = vulkan.c; path = "glfw-3.2.1/src/vulkan.c"; sourceTree = SOURCE_ROOT; };
+		1183BA08AA934A30B1E5E42F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/fem.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = fem.c; path = src/fem.c; sourceTree = SOURCE_ROOT; };
+		15F98D78BA0142098577BC4F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = posix_thread.h; path = "glfw-3.2.1/src/posix_thread.h"; sourceTree = SOURCE_ROOT; };
+		19E3DDA4A8D1427BA00408B4 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = posix_thread.c; path = "glfw-3.2.1/src/posix_thread.c"; sourceTree = SOURCE_ROOT; };
+		1BA95C0803394CCBABC47073 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_window.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_window.m; path = "glfw-3.2.1/src/cocoa_window.m"; sourceTree = SOURCE_ROOT; };
+		1DC8CF5D668E448695CA4E3B /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = glfw3.h; path = "glfw-3.2.1/include/GLFW/glfw3.h"; sourceTree = SOURCE_ROOT; };
+		2526EFFFAC9B4641889A46F5 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = osmesa_context.c; path = "glfw-3.2.1/src/osmesa_context.c"; sourceTree = SOURCE_ROOT; };
+		2C283B2BECB94D8CA07F1B60 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_platform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = cocoa_platform.h; path = "glfw-3.2.1/src/cocoa_platform.h"; sourceTree = SOURCE_ROOT; };
+		3990EC32BAC64F91A5EC6280 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/glfem.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = glfem.c; path = src/glfem.c; sourceTree = SOURCE_ROOT; };
+		3AE0E57FFC5A4F79A8145498 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = nsgl_context.m; path = "glfw-3.2.1/src/nsgl_context.m"; sourceTree = SOURCE_ROOT; };
+		4CB05542BB134E06826F43F8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_monitor.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_monitor.m; path = "glfw-3.2.1/src/cocoa_monitor.m"; sourceTree = SOURCE_ROOT; };
+		4D815D62418A44EF99374106 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = nsgl_context.h; path = "glfw-3.2.1/src/nsgl_context.h"; sourceTree = SOURCE_ROOT; };
+		4EBECD83D5864C91AA4C47FB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/input.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = input.c; path = "glfw-3.2.1/src/input.c"; sourceTree = SOURCE_ROOT; };
+		4F3FF6089EA84520B7EF1231 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/glfw_config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = glfw_config.h; path = "glfw-3.2.1/src/glfw_config.h"; sourceTree = SOURCE_ROOT; };
+		544DE1E5C6224D3084B62551 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = "glfw-3.2.1/src/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+		55094E2099B041A29D94854C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_joystick.m; path = "glfw-3.2.1/src/cocoa_joystick.m"; sourceTree = SOURCE_ROOT; };
+		595FB8A6A8CD4BDAB7DF3973 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_init.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = cocoa_init.m; path = "glfw-3.2.1/src/cocoa_init.m"; sourceTree = SOURCE_ROOT; };
+		6602DA8F97184C478D8CF16E /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/mappings.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = mappings.h; path = "glfw-3.2.1/src/mappings.h"; sourceTree = SOURCE_ROOT; };
+		694EA82BC74A4E6B8010F071 /* glfw */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglfw3.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		72C69A7649474B799F44ECE8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/init.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = init.c; path = "glfw-3.2.1/src/init.c"; sourceTree = SOURCE_ROOT; };
+		83C41E16537A4426B0D6A322 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_time.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = cocoa_time.c; path = "glfw-3.2.1/src/cocoa_time.c"; sourceTree = SOURCE_ROOT; };
+		898F697AAA4346928C5F6988 /* myFem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = myFem; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9D2AC748C104181B1B21C49 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		B587C97C673345F99FBB114F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3native.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = glfw3native.h; path = "glfw-3.2.1/include/GLFW/glfw3native.h"; sourceTree = SOURCE_ROOT; };
+		B8AFD30DB5934C3A85EA68FC /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/internal.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = internal.h; path = "glfw-3.2.1/src/internal.h"; sourceTree = SOURCE_ROOT; };
+		BB46F146EC15403291D59384 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/main.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = main.c; path = src/main.c; sourceTree = SOURCE_ROOT; };
+		C0954A4180284BD39C1C6F68 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/window.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = window.c; path = "glfw-3.2.1/src/window.c"; sourceTree = SOURCE_ROOT; };
+		C1FECE9D728D4079A75564B8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		CD575A80B366463AB392FA99 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E247692A2CAE4CCD8E666CDB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = egl_context.h; path = "glfw-3.2.1/src/egl_context.h"; sourceTree = SOURCE_ROOT; };
+		E28779D78E9447C0AD0F05ED /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E5A80CDFE5984CAD8DA86607 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/context.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = context.c; path = "glfw-3.2.1/src/context.c"; sourceTree = SOURCE_ROOT; };
+		FABF638450F24669A4551DC7 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = cocoa_joystick.h; path = "glfw-3.2.1/src/cocoa_joystick.h"; sourceTree = SOURCE_ROOT; };
+		FE308B753F47447DBFE4CB66 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = egl_context.c; path = "glfw-3.2.1/src/egl_context.c"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		21637285CF7A49E6A488EC47 = {
+			isa = PBXGroup;
+			children = (
+				DEE611B67AAB4BB980E16DBC /* run */,
+				3F2B4C2199384ED09F00CD25 /* myFem */,
+				8B40AF58DD974FB8ADF7DF29 /* ALL_BUILD */,
+				C3032E1EEC424A5FA7BE0026 /* ZERO_CHECK */,
+				931E7A073DF44480A9F07788 /* GLFW3 */,
+				44989712FC92461184B47DC4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3529A4DF06C642CDB0244CE9 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		3F2B4C2199384ED09F00CD25 /* myFem */ = {
+			isa = PBXGroup;
+			children = (
+				A22FA95B4DDD47859140DAC8 /* Source Files */,
+				E28779D78E9447C0AD0F05ED /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */,
+			);
+			name = myFem;
+			sourceTree = "<group>";
+		};
+		415D78176CEC4BA99391C0EA /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				595FB8A6A8CD4BDAB7DF3973 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_init.m */,
+				55094E2099B041A29D94854C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.m */,
+				4CB05542BB134E06826F43F8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_monitor.m */,
+				83C41E16537A4426B0D6A322 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_time.c */,
+				1BA95C0803394CCBABC47073 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_window.m */,
+				E5A80CDFE5984CAD8DA86607 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/context.c */,
+				FE308B753F47447DBFE4CB66 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.c */,
+				72C69A7649474B799F44ECE8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/init.c */,
+				4EBECD83D5864C91AA4C47FB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/input.c */,
+				09FBE5A122A34987B97E2A31 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/monitor.c */,
+				3AE0E57FFC5A4F79A8145498 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.m */,
+				2526EFFFAC9B4641889A46F5 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.c */,
+				19E3DDA4A8D1427BA00408B4 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.c */,
+				108889654E9E495587EBA4DF /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/vulkan.c */,
+				C0954A4180284BD39C1C6F68 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/window.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		44989712FC92461184B47DC4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				898F697AAA4346928C5F6988 /* myFem */,
+				694EA82BC74A4E6B8010F071 /* glfw */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		57F9E81872934340B7AB42A0 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8A394992ECBF4549B7E08736 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		8A7A826C668F464BA6AC17D5 /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				415D78176CEC4BA99391C0EA /* Source Files */,
+				ACF5EA680C264D0CA86FC17D /* Header Files */,
+				544DE1E5C6224D3084B62551 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/CMakeLists.txt */,
+			);
+			name = glfw;
+			sourceTree = "<group>";
+		};
+		8B40AF58DD974FB8ADF7DF29 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				3529A4DF06C642CDB0244CE9 /* CMake Rules */,
+				CD575A80B366463AB392FA99 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		931E7A073DF44480A9F07788 /* GLFW3 */ = {
+			isa = PBXGroup;
+			children = (
+				8A7A826C668F464BA6AC17D5 /* glfw */,
+			);
+			name = GLFW3;
+			sourceTree = "<group>";
+		};
+		A22FA95B4DDD47859140DAC8 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				1183BA08AA934A30B1E5E42F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/fem.c */,
+				3990EC32BAC64F91A5EC6280 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/glfem.c */,
+				03346D37964442A285B1F377 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/homework.c */,
+				BB46F146EC15403291D59384 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/main.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		ACF5EA680C264D0CA86FC17D /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				1DC8CF5D668E448695CA4E3B /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3.h */,
+				B587C97C673345F99FBB114F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include/GLFW/glfw3native.h */,
+				FABF638450F24669A4551DC7 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.h */,
+				2C283B2BECB94D8CA07F1B60 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_platform.h */,
+				E247692A2CAE4CCD8E666CDB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.h */,
+				4F3FF6089EA84520B7EF1231 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/glfw_config.h */,
+				B8AFD30DB5934C3A85EA68FC /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/internal.h */,
+				6602DA8F97184C478D8CF16E /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/mappings.h */,
+				4D815D62418A44EF99374106 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.h */,
+				0E3912DCA8E14C9CA5A0FC2C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.h */,
+				15F98D78BA0142098577BC4F /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		C3032E1EEC424A5FA7BE0026 /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				8A394992ECBF4549B7E08736 /* CMake Rules */,
+				A9D2AC748C104181B1B21C49 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		DEE611B67AAB4BB980E16DBC /* run */ = {
+			isa = PBXGroup;
+			children = (
+				57F9E81872934340B7AB42A0 /* CMake Rules */,
+				C1FECE9D728D4079A75564B8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeLists.txt */,
+			);
+			name = run;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		689BFCF029404EFFA6E6C7D5 /* glfw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 654B65C5E7904B39BCF6C680 /* Build configuration list for PBXNativeTarget "glfw" */;
+			buildPhases = (
+				232F94982E554D4EBC55BB03 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4D6520391FF400BBBC0CC4C /* PBXTargetDependency */,
+			);
+			name = glfw;
+			productName = glfw;
+			productReference = 694EA82BC74A4E6B8010F071 /* glfw */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BCA56C902AB04CF59192F826 /* myFem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 135569C7CF474974956F8B7A /* Build configuration list for PBXNativeTarget "myFem" */;
+			buildPhases = (
+				CF1A4FBC4C884F67AF94B6BC /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				865B5449BCA44ED682A57364 /* PBXTargetDependency */,
+				2EA5E9200AE44272A989ED53 /* PBXTargetDependency */,
+			);
+			name = myFem;
+			productName = myFem;
+			productReference = 898F697AAA4346928C5F6988 /* myFem */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		539CBEBECD7740D3B54209D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0920;
+			};
+			buildConfigurationList = 7ACB4C2D86A942588194B1D8 /* Build configuration list for PBXProject "myFemProject" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				AC23BD3B9F8E4CABAF35682B /* Debug */,
+				4C20EAB097FC4F57A0CFE10C /* Release */,
+				89238CA829414E84B1AE43F0 /* MinSizeRel */,
+				ABEBDEB426204386A27EF1AB /* RelWithDebInfo */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 21637285CF7A49E6A488EC47;
+			projectDirPath = .;
+			projectRoot = "";
+			targets = (
+				10510D0D9CA54D0DA06DB851 /* ALL_BUILD */,
+				6D78535E623A4153AF748773 /* ZERO_CHECK */,
+				BCA56C902AB04CF59192F826 /* myFem */,
+				651CD93576294EB5BAB87948 /* run */,
+				689BFCF029404EFFA6E6C7D5 /* glfw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5414325B86924D5E8044CA98 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		5B81B4AAAB4048E6A8413FFB = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		73DDAADCF28C419C9758E3CB /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson -f /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeScripts/run_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		742F4F1A318C448BB0570271 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson -f /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		8C7D6055A71045149591656A = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		E148148C1F6A49EDAC11AEA4 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson -f /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		232F94982E554D4EBC55BB03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A58324764FC44AD9B730C758 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_init.m */,
+				A26E746DF1A542B2A66444B8 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_joystick.m */,
+				899CEF1125B645B5822AD1CB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_monitor.m */,
+				9229AA29AD744B75830D4D36 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_time.c */,
+				A0B227CFA719470A8DD88A29 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/cocoa_window.m */,
+				1E41AC37DE7B44EF9B111543 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/context.c */,
+				75D470368E474E239AB6EA37 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/egl_context.c */,
+				8408E18D18B847D7A6C3275A /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/init.c */,
+				CEA0B81DEBA84744992F8E80 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/input.c */,
+				529BFAD3D6AC4848A785354D /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/monitor.c */,
+				99E06E1DD5624CC1B385D0AB /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/nsgl_context.m */,
+				E2067EC05E3345C59F38E8A1 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/osmesa_context.c */,
+				5383D19F974848BEA347BC18 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/posix_thread.c */,
+				BB0A3C87B96145FAAB6C48E1 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/vulkan.c */,
+				A394FC0FC218482A8D863818 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/window.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF1A4FBC4C884F67AF94B6BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEA900AB5F6841D59D396E2C /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/fem.c */,
+				2182F97EBD6C498FB0929BE1 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/glfem.c */,
+				B58C4ABC10FE4DB2887600E5 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/homework.c */,
+				8AEB9A9BCD64437A89090B58 /* /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/src/main.c */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EA5E9200AE44272A989ED53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D78535E623A4153AF748773 /* ZERO_CHECK */;
+			targetProxy = B7E5123B74784B67A8C3BD00 /* PBXContainerItemProxy */;
+		};
+		54B009AA2BA943B7B076B948 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 689BFCF029404EFFA6E6C7D5 /* glfw */;
+			targetProxy = A7F3CE885ED74950B33201A2 /* PBXContainerItemProxy */;
+		};
+		865B5449BCA44ED682A57364 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 689BFCF029404EFFA6E6C7D5 /* glfw */;
+			targetProxy = 5B31241CF48349208DD33094 /* PBXContainerItemProxy */;
+		};
+		8841C47B80964AD5B0117EF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D78535E623A4153AF748773 /* ZERO_CHECK */;
+			targetProxy = A96AC237EADA476185063483 /* PBXContainerItemProxy */;
+		};
+		B462385A0941461097800B0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCA56C902AB04CF59192F826 /* myFem */;
+			targetProxy = 21BFCB59EC1C4E9295D058CC /* PBXContainerItemProxy */;
+		};
+		C6FCB17232604AD695C5091C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D78535E623A4153AF748773 /* ZERO_CHECK */;
+			targetProxy = A3F8820BCE74433F802E431F /* PBXContainerItemProxy */;
+		};
+		E4517D2828234599AE7FC099 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCA56C902AB04CF59192F826 /* myFem */;
+			targetProxy = 702C6CD9042B4AF4894942E6 /* PBXContainerItemProxy */;
+		};
+		E4D6520391FF400BBBC0CC4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D78535E623A4153AF748773 /* ZERO_CHECK */;
+			targetProxy = 9EEF4877DE38459ABCB1AD4C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		02A8CECFF9D744AF8B9DF370 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include","/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG -fPIC -Wall  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		1605EE0663914741B74027E6 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk;
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/build";
+			};
+			name = MinSizeRel;
+		};
+		1D4C5CAF34D34AAA84EB11DF /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",graphic);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/MinSizeRel/libglfw3.a -framework OpenGL -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = myFem;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		3120793A1D404A1B85A24225 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include","/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "   -fPIC -Wall  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		3E21068D4172482A83AF13F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",graphic);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/Release/libglfw3.a -framework OpenGL -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = myFem;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		4E0134D2482D4487A7906504 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		57A20357037140F09A9286D6 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		599C51FBAB624BC98BF1DBCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		634D5784276541828225DF1F /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include","/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "       -DNDEBUG -fPIC -Wall  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		719F03C7CA70401586F1B6B1 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",graphic);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "       -DNDEBUG  ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/RelWithDebInfo/libglfw3.a -framework OpenGL -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = myFem;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		8604B796A94943B487B0F35F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = run;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		8932296E40CF4101B0A15726 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		8D739A4BE3894FE7A527F440 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = run;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		92D6647BA8A24E2E992E4EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",graphic);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "    ";
+				OTHER_LDFLAGS = " -Wl,-search_paths_first -Wl,-headerpad_max_install_names  /Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src/Debug/libglfw3.a -framework OpenGL -framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = myFem;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		9D2322E739114B189BF90011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",_GLFW_USE_CONFIG_H);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include","/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG -fPIC -Wall  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = glfw3;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/src";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		A16A3C5351A74CC8AFF628CD /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		A2CE526080AC4C4E9D88C51C /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		A936EC68E9CD4F9AAF904727 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		BD995B966EB84A90975CFEDC /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = run;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		BFBA3376413A462B94670DB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk;
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/build";
+			};
+			name = Debug;
+		};
+		C2A895CF83BC4C81BEA424E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk;
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/build";
+			};
+			name = Release;
+		};
+		C692C42C64974966843AABFC /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = run;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		D1B525BF2336433EAE46274C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk;
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/build";
+			};
+			name = RelWithDebInfo;
+		};
+		F99E3D8B06F24C5EA0229000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson/glfw-3.2.1/include");
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/constantindeschaetzen/Documents/UCL/BAC2/Q4/ElementFinis/Devoirs/myFem-Poisson";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		135569C7CF474974956F8B7A /* Build configuration list for PBXNativeTarget "myFem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92D6647BA8A24E2E992E4EC8 /* Debug */,
+				3E21068D4172482A83AF13F1 /* Release */,
+				1D4C5CAF34D34AAA84EB11DF /* MinSizeRel */,
+				719F03C7CA70401586F1B6B1 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		44420EFD8972410A92DE96F6 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F99E3D8B06F24C5EA0229000 /* Debug */,
+				599C51FBAB624BC98BF1DBCB /* Release */,
+				A16A3C5351A74CC8AFF628CD /* MinSizeRel */,
+				A936EC68E9CD4F9AAF904727 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		654B65C5E7904B39BCF6C680 /* Build configuration list for PBXNativeTarget "glfw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3120793A1D404A1B85A24225 /* Debug */,
+				9D2322E739114B189BF90011 /* Release */,
+				02A8CECFF9D744AF8B9DF370 /* MinSizeRel */,
+				634D5784276541828225DF1F /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7ACB4C2D86A942588194B1D8 /* Build configuration list for PBXProject "myFemProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFBA3376413A462B94670DB2 /* Debug */,
+				C2A895CF83BC4C81BEA424E4 /* Release */,
+				1605EE0663914741B74027E6 /* MinSizeRel */,
+				D1B525BF2336433EAE46274C /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7E84EFE6B89C4148A5F3FEEC /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E0134D2482D4487A7906504 /* Debug */,
+				8932296E40CF4101B0A15726 /* Release */,
+				A2CE526080AC4C4E9D88C51C /* MinSizeRel */,
+				57A20357037140F09A9286D6 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		88B7D72C76754F509F5F1C45 /* Build configuration list for PBXAggregateTarget "run" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8604B796A94943B487B0F35F /* Debug */,
+				8D739A4BE3894FE7A527F440 /* Release */,
+				BD995B966EB84A90975CFEDC /* MinSizeRel */,
+				C692C42C64974966843AABFC /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 539CBEBECD7740D3B54209D2 /* Project object */;
+}
