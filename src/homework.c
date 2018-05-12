@@ -61,8 +61,8 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 	femDiscrete *theSpace = theProblem->space;
 
 	if (theSpace->n > 4) Error("Unexpected discrete space size !");
-    double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4], tau[4];
-	int iElem, iInteg, iEdge, i, j, map[4];
+    double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4], tau[4], gamma = 0.5;
+    int iElem, iInteg, iEdge, i, j, map[4];
 
 	for (iElem = 0; iElem < theMesh->nElem; iElem++) {
 		femMeshLocal(theMesh, iElem, map, x, y);
@@ -97,9 +97,9 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
 					theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
-                    + tau[i] * tau[j];
+                    + gamma * tau[i] * tau[j];
 				}
-                theSystem->B[map[i]] += tau[i] * tau[j];
+                theSystem->B[map[i]] += gamma * tau[i] * tau[j];
 			}
 		}
 	}
@@ -110,7 +110,8 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 				int iNode = theEdges->edges[iEdge].node[i];
 				double xloc = theMesh->X[iNode];
 				double yloc = theMesh->Y[iNode];
-				femFullSystemConstrain(theSystem, iNode, 0.0);
+                if (xloc * xloc + yloc*yloc <= 0.4*0.4) femFullSystemConstrain(theSystem, iNode, 0.0);
+                else femFullSystemConstrain(theSystem, iNode, 3.0);
 			}
 		}
 	}
