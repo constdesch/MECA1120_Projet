@@ -61,7 +61,7 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 	femDiscrete *theSpace = theProblem->space;
 
 	if (theSpace->n > 4) Error("Unexpected discrete space size !");
-	double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4];
+    double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4], tau[4];
 	int iElem, iInteg, iEdge, i, j, map[4];
 
 	for (iElem = 0; iElem < theMesh->nElem; iElem++) {
@@ -69,8 +69,11 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 		for (iInteg = 0; iInteg < theRule->n; iInteg++) {
 			double xsi = theRule->xsi[iInteg];
 			double eta = theRule->eta[iInteg];
+            double xx = x[iInteg];
+            double yy = y[iInteg];
 			double weight = theRule->weight[iInteg];
 			femDiscretePhi2(theSpace, xsi, eta, phi);
+            femDiscretePhi2(theSpace,  xx,  yy, tau);
 			femDiscreteDphi2(theSpace, xsi, eta, dphidxsi, dphideta);
 			double dxdxsi = 0;
 			double dxdeta = 0;
@@ -93,12 +96,10 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 			}
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
-					theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j]
-						+ dphidy[i] * dphidy[j]) * jac * weight;
+					theSystem->A[map[i]][map[j]] += (jac * dphidx[i] * dphidx[j] + jac * dphidy[i] * dphidy[j]
+                                                     + tau[i]*tau[j]) * weight;
 				}
-			}
-			for (i = 0; i < theSpace->n; i++) {
-				theSystem->B[map[i]] += phi[i] * jac *weight;
+                theSystem->B[map[i]] += tau[i] *weight;
 			}
 		}
 	}
