@@ -143,5 +143,6 @@ void        femWarning(char *text, int line, char *file);
 
 /* @area: calcule l'aire de chaque triangle et la stocke dans un tableau 'double *area' */
 void area (femPoissonProblem *theProblem);
-
+void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains);
+int withinTriangle(femPoissonProblem *theProblem, double xc, double yc, double area, double *px, double *py);
 #endif

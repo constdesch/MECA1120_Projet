@@ -18,15 +18,33 @@ void area (femPoissonProblem *theProblem){
     }
 }
 
-/*
-int withinTriangle(femPoissonProblem *theProblem,int xc, int yc, double area){
-    femMesh *theMesh = theProblem->mesh;
-    
-    // s = 1/(2*area) *(p0y*p2x - p0x*p2y + (p2y - p0y)*px + (p0x - p2x)*py);
-    // t = 1/(2*area) *(p0x*p1y - p0y*p1x + (p0y - p1y)*px + (p1x - p0x)*py);
-    // return (s>0 && t>0 && (1-s-t)>0);
-}*/
 
+int withinTriangle(femPoissonProblem *theProblem, double xc, double yc, double area, double px[3],double py[3]) {
+    femMesh *theMesh = theProblem->mesh;
+	double p0x = px[0], p1x = px[1], p2x = px[2], p0y = py[0], p1y = py[1], p2y = py[2];
+     double s = 1/(2*area) *(p0y*p2x - p0x*p2y + (p2y - p0y)*xc + (p0x - p2x)*yc);
+     double t = 1/(2*area) *(p0x*p1y - p0y*p1x + (p0y - p1y)*xc + (p1x - p0x)*yc);
+	 if ((s > 0 && t > 0 && (1 - s - t) > 0))
+		 return 1;
+	 else return 0;
+}
+void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains) {
+	int i,j;
+	femMesh *theMesh = theProblem->mesh;
+	int map[3];
+	double px[3], py[3];
+	for (i = 0; i < theGrains->n; i++) {
+		int ExitFlag = 0;
+		for (j = 0; j < theMesh->nElem&&ExitFlag==0; j++) {
+			femMeshLocal(theMesh, j, map, px, py);
+			if (withinTriangle(theProblem, theGrains->x[i], theGrains->y[i], theMesh->area[j], px, py) == 1) {
+				theGrains->elem[i] = j;
+				ExitFlag++;
+			}
+		}
+		
+	}
+}
 femPoissonProblem *femPoissonCreate(const char *filename)
 {
 	femPoissonProblem *theProblem = malloc(sizeof(femPoissonProblem));
@@ -77,8 +95,7 @@ void femMeshLocal(const femMesh *theMesh, const int iElem, int *map, double *x, 
 
 # endif
 # ifndef NOPOISSONSOLVE
-
-void femPoissonSolve(femPoissonProblem *theProblem, int flag)
+void femPoissonSolve(femPoissonProblem *theProblem, int flag,femGrains* theGrains)
 {
 	femMesh *theMesh = theProblem->mesh;
 	femEdges *theEdges = theProblem->edges;
@@ -92,6 +109,20 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag)
 
 	for (iElem = 0; iElem < theMesh->nElem; iElem++) {
 		femMeshLocal(theMesh, iElem, map, x, y);
+		double present = 0.0;
+		int j, exitflag = 0;
+		for (j = 0; j < theGrains->n&&exitflag==0; j++) {
+			if (iElem == theGrains->elem[j]) {
+				if (flag == 0) {
+					present = theGrains->vx[j];
+					exitflag++;
+				}
+				else {
+					present = theGrains->vy[j];
+					exitflag++;
+				}
+			}
+		}
 		for (iInteg = 0; iInteg < theRule->n; iInteg++) {
 			double xsi = theRule->xsi[iInteg];
 			double eta = theRule->eta[iInteg];
@@ -122,10 +153,17 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag)
 			}
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
-                    theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
-                    //+ gamma * tau[i] * tau[j];
+					if (present != 0.0) {
+						theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
+						+ gamma * tau[i] * tau[j]*present;
+					}
+					else
+					{
+						theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
+					}
 				}
-                theSystem->B[map[i]] += weight * jac * phi[i]; //gamma * tau[i];
+				if(present!=0)
+                theSystem->B[map[i]] +=  gamma * tau[i]*present;
 			}
 		}
 	}
@@ -284,5 +322,4 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax)
 		y[i] += vy[i] * dt;
 	}
 }
-
 # endif

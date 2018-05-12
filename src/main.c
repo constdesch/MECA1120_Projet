@@ -17,8 +17,8 @@ int main(void)
     
 
 
-	femPoissonProblem* theProblemU = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
-    femPoissonProblem* theProblemV = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
+	femPoissonProblem* theProblemU = femPoissonCreate("..\\data\\meca1120-projet-meshMedium.txt");
+    femPoissonProblem* theProblemV = femPoissonCreate("..\\data\\meca1120-projet-meshMedium.txt");
 
 	femPoissonSolve(theProblemU,0);
     femPoissonSolve(theProblemV,1);
