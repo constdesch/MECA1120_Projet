@@ -104,10 +104,6 @@ void                 femFullSystemAlloc(femFullSystem* mySystem, int size);
 double*              femFullSystemEliminate(femFullSystem* mySystem);
 void                 femFullSystemConstrain(femFullSystem* mySystem, int myNode, double value);
 
-femPoissonProblem   *femPoissonCreate(const char *filename);
-void                 femPoissonFree(femPoissonProblem *theProblem);
-void                 femPoissonSolve(femPoissonProblem *theProblem, int flag);
-
 
 typedef struct {
     int n;
@@ -131,7 +127,13 @@ femGrains  *femGrainsCreateSimple(int n, double r, double m, double radiusIn, do
 femGrains  *femGrainsCreateTiny(double radiusIn, double radiusOut);
 void        femGrainsFree(femGrains *myGrains);
 void        femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax);
-double      femGrainsContactIterate(femGrains *myGrains, double dt, int iter); 
+double      femGrainsContactIterate(femGrains *myGrains, double dt, int iter);
+
+
+femPoissonProblem   *femPoissonCreate(const char *filename);
+void                 femPoissonFree(femPoissonProblem *theProblem);
+void                 femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains *theGrains);
+
 
 double      femMin(double *x, int n);
 double      femMax(double *x, int n);
@@ -144,5 +146,5 @@ void        femWarning(char *text, int line, char *file);
 /* @area: calcule l'aire de chaque triangle et la stocke dans un tableau 'double *area' */
 void area (femPoissonProblem *theProblem);
 void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains);
-int withinTriangle(femPoissonProblem *theProblem, double xc, double yc, double area, double *px, double *py);
+int withinTriangle(double xc, double yc, double area, double *px, double *py);
 #endif

@@ -1,33 +1,37 @@
 #include"fem.h"
 
+
 # ifndef NOPOISSONCREATE
 
 void area (femPoissonProblem *theProblem){
     femMesh *theMesh = theProblem->mesh;
     int elem;
     int map[3];
-    double x[3], y[3], L[3];
+    double px[3], py[3];
     for (elem=0; elem<theMesh->nElem;elem++){
-        femMeshLocal(theMesh, elem, map, x, y);
-        L[0] = sqrt( (x[1] - x[0])*(x[1] - x[0]) + (y[1] - y[0])*(y[1] - y[0]));
-        L[1] = sqrt( (x[2] - x[0])*(x[2] - x[0]) + (y[2] - y[0])*(y[2] - y[0]));
-        L[2] = sqrt( (x[1] - x[2])*(x[1] - x[2]) + (y[1] - y[2])*(y[1] - y[2]));
-        
-        double s = (L[0] + L[1] + L[2]) /2;
-        theMesh->area[elem] = sqrt(s * (s-L[0]) * (s-L[1]) * (s-L[2]));
+        femMeshLocal(theMesh, elem, map, px, py);
+        double p0x = px[0], p1x = px[1], p2x = px[2], p0y = py[0], p1y = py[1], p2y = py[2];
+        theMesh->area[elem] = -p1y * p2x + p0y * (p2x - p1x) + p0x * (p1y - p2y) + p1x * p2y ;
     }
 }
 
-
-int withinTriangle(femPoissonProblem *theProblem, double xc, double yc, double area, double px[3],double py[3]) {
-    femMesh *theMesh = theProblem->mesh;
-	double p0x = px[0], p1x = px[1], p2x = px[2], p0y = py[0], p1y = py[1], p2y = py[2];
-     double s = 1/(2*area) *(p0y*p2x - p0x*p2y + (p2y - p0y)*xc + (p0x - p2x)*yc);
-     double t = 1/(2*area) *(p0x*p1y - p0y*p1x + (p0y - p1y)*xc + (p1x - p0x)*yc);
-	 if ((s > 0 && t > 0 && (1 - s - t) > 0))
-		 return 1;
-	 else return 0;
+int withinTriangle(double xc, double yc, double area, double px[3],double py[3]) {
+    double p0x = px[0], p1x = px[1], p2x = px[2], p0y = py[0], p1y = py[1], p2y = py[2];
+    
+    double s = p0y * p2x - p0x * p2y + (p2y - p0y) * xc + (p0x - p2x)*yc;
+    double t = p0x * p1y - p0y * p1x + (p0y - p1y) * xc + (p1x - p0x)*yc;
+    
+    if ( (s<0) != (t<0))
+        return 0;
+    
+    if (area <0.0 ){
+        s = -s;
+        t = -t;
+        area = -area;
+    }
+    return ( s>0 && t>0 && (s+t) <= area );
 }
+
 void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains) {
 	int i,j;
 	femMesh *theMesh = theProblem->mesh;
@@ -37,7 +41,7 @@ void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains) {
 		int ExitFlag = 0;
 		for (j = 0; j < theMesh->nElem&&ExitFlag==0; j++) {
 			femMeshLocal(theMesh, j, map, px, py);
-			if (withinTriangle(theProblem, theGrains->x[i], theGrains->y[i], theMesh->area[j], px, py) == 1) {
+			if (withinTriangle(theGrains->x[i], theGrains->y[i], theMesh->area[j], px, py) == 1) {
 				theGrains->elem[i] = j;
 				ExitFlag++;
 			}
@@ -95,7 +99,7 @@ void femMeshLocal(const femMesh *theMesh, const int iElem, int *map, double *x, 
 
 # endif
 # ifndef NOPOISSONSOLVE
-void femPoissonSolve(femPoissonProblem *theProblem, int flag,femGrains* theGrains)
+void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrains)
 {
 	femMesh *theMesh = theProblem->mesh;
 	femEdges *theEdges = theProblem->edges;
@@ -110,15 +114,15 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag,femGrains* theGrain
 	for (iElem = 0; iElem < theMesh->nElem; iElem++) {
 		femMeshLocal(theMesh, iElem, map, x, y);
 		double present = 0.0;
-		int j, exitflag = 0;
-		for (j = 0; j < theGrains->n&&exitflag==0; j++) {
-			if (iElem == theGrains->elem[j]) {
+		int k, exitflag = 0;
+		for (k= 0; k < theGrains->n&&exitflag==0; k++) {
+			if (iElem == theGrains->elem[k]) {
 				if (flag == 0) {
-					present = theGrains->vx[j];
+					present = theGrains->vx[k];
 					exitflag++;
 				}
 				else {
-					present = theGrains->vy[j];
+					present = theGrains->vy[k];
 					exitflag++;
 				}
 			}
@@ -155,7 +159,7 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag,femGrains* theGrain
 				for (j = 0; j < theSpace->n; j++) {
 					if (present != 0.0) {
 						theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
-						+ gamma * tau[i] * tau[j]*present;
+						+ gamma * tau[i] * tau[j] * present;
 					}
 					else
 					{
@@ -171,8 +175,8 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag,femGrains* theGrain
 	for (iEdge = 0; iEdge < theEdges->nEdge; iEdge++) {
 		if (theEdges->edges[iEdge].elem[1] < 0) {
 			for (i = 0; i < 2; i++) {
-                double radiusOut = 2.0;
-                double radiusIn = 0.4;
+                double radiusOut = theGrains->radiusOut;
+                double radiusIn = theGrains->radiusIn;
 				int iNode = theEdges->edges[iEdge].node[i];
 				double xloc = theMesh->X[iNode];
 				double yloc = theMesh->Y[iNode];

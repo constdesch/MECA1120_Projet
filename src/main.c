@@ -15,13 +15,25 @@
 int main(void)
 {  
     
+    int    n = 15;
+    double radius    = 0.1;
+    double mass      = 0.1;
+    double radiusIn  = 0.4;
+    double radiusOut = 2.0;
+    double dt        = 1e-1;
+    double tEnd      = 8.0;
+    double tol       = 1e-6;
+    double t         = 0;
+    double iterMax   = 100;
+    femGrains* theGrains = femGrainsCreateSimple(n,radius,mass,radiusIn,radiusOut);
+    
 
 
-	femPoissonProblem* theProblemU = femPoissonCreate("..\\data\\meca1120-projet-meshMedium.txt");
-    femPoissonProblem* theProblemV = femPoissonCreate("..\\data\\meca1120-projet-meshMedium.txt");
+	femPoissonProblem* theProblemU = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
+    femPoissonProblem* theProblemV = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
 
-	femPoissonSolve(theProblemU,0);
-    femPoissonSolve(theProblemV,1);
+	femPoissonSolve(theProblemU,0, theGrains);
+    femPoissonSolve(theProblemV,1, theGrains);
     
     int i;
     double *B = malloc(sizeof(double) * theProblemU->system->size);
@@ -31,17 +43,6 @@ int main(void)
         B[i] = sqrt(B1[i]*B1[i] + B2[i]*B2[i]);
     }
     
-    int    n = 15;
-    double radius    = 0.1;
-    double mass      = 0.1;
-    double radiusIn  = 0.4;
-    double radiusOut = 2.0;    
-    double dt        = 1e-1;
-    double tEnd      = 8.0;
-    double tol       = 1e-6;
-    double t         = 0;
-    double iterMax   = 100;
-    femGrains* theGrains = femGrainsCreateSimple(n,radius,mass,radiusIn,radiusOut);
    
   //  A decommenter pour obtenir l'exemple de la seance d'exercice :-)
   //  femGrains* theGrains = femGrainsCreateTiny(radiusIn,radiusOut);;
