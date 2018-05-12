@@ -13,10 +13,19 @@ void area (femPoissonProblem *theProblem){
         L[1] = sqrt( (x[2] - x[0])*(x[2] - x[0]) + (y[2] - y[0])*(y[2] - y[0]));
         L[2] = sqrt( (x[1] - x[2])*(x[1] - x[2]) + (y[1] - y[2])*(y[1] - y[2]));
         
-        double s = L[0] + L[1] + L[2];
+        double s = (L[0] + L[1] + L[2]) /2;
         theMesh->area[elem] = sqrt(s * (s-L[0]) * (s-L[1]) * (s-L[2]));
     }
 }
+
+/*
+int withinTriangle(femPoissonProblem *theProblem,int xc, int yc, double area){
+    femMesh *theMesh = theProblem->mesh;
+    
+    // s = 1/(2*area) *(p0y*p2x - p0x*p2y + (p2y - p0y)*px + (p0x - p2x)*py);
+    // t = 1/(2*area) *(p0x*p1y - p0y*p1x + (p0y - p1y)*px + (p1x - p0x)*py);
+    // return (s>0 && t>0 && (1-s-t)>0);
+}*/
 
 femPoissonProblem *femPoissonCreate(const char *filename)
 {
