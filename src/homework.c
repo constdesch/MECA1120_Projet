@@ -2,6 +2,22 @@
 
 # ifndef NOPOISSONCREATE
 
+void area (femPoissonProblem *theProblem){
+    femMesh *theMesh = theProblem->mesh;
+    int elem;
+    int map[3];
+    double x[3], y[3], L[3];
+    for (elem=0; elem<theMesh->nElem;elem++){
+        femMeshLocal(theMesh, elem, map, x, y);
+        L[0] = sqrt( (x[1] - x[0])*(x[1] - x[0]) + (y[1] - y[0])*(y[1] - y[0]));
+        L[1] = sqrt( (x[2] - x[0])*(x[2] - x[0]) + (y[2] - y[0])*(y[2] - y[0]));
+        L[2] = sqrt( (x[1] - x[2])*(x[1] - x[2]) + (y[1] - y[2])*(y[1] - y[2]));
+        
+        double s = L[0] + L[1] + L[2];
+        theMesh->area[elem] = sqrt(s * (s-L[0]) * (s-L[1]) * (s-L[2]));
+    }
+}
+
 femPoissonProblem *femPoissonCreate(const char *filename)
 {
 	femPoissonProblem *theProblem = malloc(sizeof(femPoissonProblem));

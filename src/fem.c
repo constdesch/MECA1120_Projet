@@ -182,6 +182,7 @@ femMesh *femMeshRead(const char *filename)
 		ErrorScan(sscanf(str, "Number of triangles %d \n", &theMesh->nElem));
 		theMesh->elem = malloc(sizeof(int) * 3 * theMesh->nElem);
 		theMesh->nLocalNode = 3;
+        theMesh->area = malloc(sizeof(double)*theMesh->nElem);
 		for (i = 0; i < theMesh->nElem; ++i) {
 			elem = &(theMesh->elem[i * 3]);
 			ErrorScan(fscanf(file, "%d : %d %d %d\n", &trash, &elem[0], &elem[1], &elem[2]));

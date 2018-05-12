@@ -28,6 +28,7 @@ typedef struct {
 	int *elem;
 	double *X;
 	double *Y;
+    double *area;
 	int nElem;
 	int nNode;
 	int nLocalNode;
@@ -137,5 +138,9 @@ void        femError(char *text, int line, char *file);
 void        femErrorScan(int test, int line, char *file);
 void        femWarning(char *text, int line, char *file);
 
+/* ADDED FUNCTIONS */
+
+/* @area: calcule l'aire de chaque triangle et la stocke dans un tableau 'double *area' */
+void area (femPoissonProblem *theProblem);
 
 #endif
