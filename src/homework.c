@@ -1,5 +1,5 @@
 #include"fem.h"
-
+#include <math.h>
 
 # ifndef NOPOISSONCREATE
 
@@ -12,7 +12,9 @@ void area (femPoissonProblem *theProblem){
         femMeshLocal(theMesh, elem, map, px, py);
         double p0x = px[0], p1x = px[1], p2x = px[2], p0y = py[0], p1y = py[1], p2y = py[2];
         theMesh->area[elem] = -p1y * p2x + p0y * (p2x - p1x) + p0x * (p1y - p2y) + p1x * p2y ;
+        //printf("area : %f ",theMesh->area[elem]);
     }
+    //printf("\n");
 }
 
 int withinTriangle(double xc, double yc, double area, double px[3],double py[3]) {
@@ -106,6 +108,19 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 	femFullSystem *theSystem = theProblem->system;
 	femIntegration *theRule = theProblem->rule;
 	femDiscrete *theSpace = theProblem->space;
+    /*indexoftriangle(theProblem, theGrains);
+    int z;
+    for(z=0; theGrains->n;z++){
+        printf("%d ",theGrains->elem[z]);
+    }
+    printf("\n");*/
+    /*int elem;
+    printf("area : ");
+    for (elem=0; elem<theMesh->nElem;elem++){
+        printf("%f ",theMesh->area[elem]);
+    }
+    printf("\n"); */
+    
 
 	if (theSpace->n > 4) Error("Unexpected discrete space size !");
     double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4], tau[4], gamma = 0.5;
@@ -115,7 +130,7 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 		femMeshLocal(theMesh, iElem, map, x, y);
 		double present = 0.0;
 		int k, exitflag = 0;
-		for (k= 0; k < theGrains->n&&exitflag==0; k++) {
+		for (k= 0; k < theGrains->n && exitflag==0; k++) {
 			if (iElem == theGrains->elem[k]) {
 				if (flag == 0) {
 					present = theGrains->vx[k];
@@ -127,6 +142,7 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 				}
 			}
 		}
+        /*printf("present : %f\n",present);*/
 		for (iInteg = 0; iInteg < theRule->n; iInteg++) {
 			double xsi = theRule->xsi[iInteg];
 			double eta = theRule->eta[iInteg];
@@ -136,12 +152,12 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 			femDiscretePhi2(theSpace, xsi, eta, phi);
             femDiscretePhi2(theSpace,  xx,  yy, tau);
 			femDiscreteDphi2(theSpace, xsi, eta, dphidxsi, dphideta);
-			double dxdxsi = 0;
-			double dxdeta = 0;
-			double dydxsi = 0;
-			double dydeta = 0;
-			double xloc = 0;
-			double yloc = 0;
+			double dxdxsi = 0.0;
+			double dxdeta = 0.0;
+			double dydxsi = 0.0;
+			double dydeta = 0.0;
+			double xloc = 0.0;
+			double yloc = 0.0;
 			for (i = 0; i < theSpace->n; i++) {
 				xloc += x[i] * phi[i];
 				yloc += y[i] * phi[i];
@@ -157,16 +173,10 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 			}
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
-					if (present != 0.0) {
 						theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
-						+ gamma * tau[i] * tau[j] * present;
-					}
-					else
-					{
-						theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
-					}
+						+ gamma * tau[i] * tau[j];
 				}
-				if(present!=0)
+				if(present!=0.0)
                 theSystem->B[map[i]] +=  gamma * tau[i]*present;
 			}
 		}
@@ -182,7 +192,7 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
 				double yloc = theMesh->Y[iNode];
                 if (xloc * xloc + yloc*yloc <= radiusIn*radiusIn) femFullSystemConstrain(theSystem, iNode, 0.0);
                 else {
-                    double vext = 3.0;
+                    double vext = 20.0;
                     if (flag == 0){
                         double vx = vext * yloc / radiusOut;
                         femFullSystemConstrain(theSystem, iNode, vx);
@@ -279,7 +289,7 @@ double femGrainsContactIterate(femGrains *myGrains, double dt, int iter)
 # ifndef NOUPDATE
 
 
-void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax)
+void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax, femPoissonProblem *theProblem)
 {
 	int i;
 	int n = myGrains->n;
@@ -325,5 +335,6 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax)
 		x[i] += vx[i] * dt;
 		y[i] += vy[i] * dt;
 	}
+    indexoftriangle(theProblem, myGrains);
 }
 # endif

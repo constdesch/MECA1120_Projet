@@ -15,7 +15,7 @@
 int main(void)
 {  
     
-    int    n = 15;
+    int    n         = 15;
     double radius    = 0.1;
     double mass      = 0.1;
     double radiusIn  = 0.4;
@@ -81,7 +81,16 @@ int main(void)
   //          printf("press CR to compute the next time step >>");
   //          char c= getchar();
   //
-            femGrainsUpdate(theGrains,dt,tol,iterMax);
+            femGrainsUpdate(theGrains,dt,tol,iterMax, theProblemU);
+            femPoissonSolve(theProblemU,0, theGrains);
+            femPoissonSolve(theProblemV,1, theGrains);
+            int j;
+            B1 = theProblemU->system->B;
+            B2 = theProblemV->system->B;
+            for (j=0;j<theProblemU->system->size;j++){
+                B[j] = sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
+            }
+            glfemPlotField(theProblemU->mesh,B);
             t += dt; }
          
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {
@@ -95,7 +104,8 @@ int main(void)
 	        (!glfwWindowShouldClose(window)));
 	   
                
-    glfwTerminate(); 
+    glfwTerminate();
+    free(B);
     femGrainsFree(theGrains);
     exit(EXIT_SUCCESS);
 }

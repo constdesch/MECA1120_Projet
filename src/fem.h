@@ -126,7 +126,7 @@ typedef struct {
 femGrains  *femGrainsCreateSimple(int n, double r, double m, double radiusIn, double radiusOut);
 femGrains  *femGrainsCreateTiny(double radiusIn, double radiusOut);
 void        femGrainsFree(femGrains *myGrains);
-void        femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax);
+void        femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax, femPoissonProblem *theProblem);
 double      femGrainsContactIterate(femGrains *myGrains, double dt, int iter);
 
 
