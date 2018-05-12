@@ -17,20 +17,31 @@ int main(void)
     
 
 
-	femPoissonProblem* theProblem = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
+	femPoissonProblem* theProblemU = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
+    femPoissonProblem* theProblemV = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
 
-	femPoissonSolve(theProblem);
-
+	femPoissonSolve(theProblemU);
+    femPoissonSolve(theProblemV);
+    
+    int i;
+    double *B = malloc(sizeof(double) * theProblemU->system->size);
+    double *B1 = theProblemU->system->B;
+    double *B2 = theProblemV->system->B;
+    for (i=0;i<theProblemU->system->size;i++){
+        B[i] = sqrt(B1[i]*B1[i] + B2[i]*B2[i]);
+    }
+    
+    int    vext      = 3;
     int    n = 15;
     double radius    = 0.1;
     double mass      = 0.1;
     double radiusIn  = 0.4;
     double radiusOut = 2.0;    
-    double dt      = 1e-1;
-    double tEnd    = 8.0;
-    double tol     = 1e-6;
-    double t       = 0;
-    double iterMax = 100;
+    double dt        = 1e-1;
+    double tEnd      = 8.0;
+    double tol       = 1e-6;
+    double t         = 0;
+    double iterMax   = 100;
     femGrains* theGrains = femGrainsCreateSimple(n,radius,mass,radiusIn,radiusOut);
    
   //  A decommenter pour obtenir l'exemple de la seance d'exercice :-)
@@ -49,7 +60,7 @@ int main(void)
         glfemReshapeWindows(radiusOut,w,h);   
 
 
-		glfemPlotField(theProblem->mesh, theProblem->system->B);
+		glfemPlotField(theProblemU->mesh,B);
 
         for (i=0 ;i < theGrains->n; i++) {     
             glColor3f(1,0,0.85f); glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);

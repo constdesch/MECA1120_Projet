@@ -96,10 +96,10 @@ void femPoissonSolve(femPoissonProblem *theProblem)
 			}
 			for (i = 0; i < theSpace->n; i++) {
 				for (j = 0; j < theSpace->n; j++) {
-					theSystem->A[map[i]][map[j]] += (jac * dphidx[i] * dphidx[j] + jac * dphidy[i] * dphidy[j]
-                                                     + tau[i]*tau[j]) * weight;
+					theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight
+                    + tau[i] * tau[j];
 				}
-                theSystem->B[map[i]] += tau[i] *weight;
+                theSystem->B[map[i]] += tau[i] * tau[j];
 			}
 		}
 	}
@@ -156,12 +156,12 @@ double femGrainsContactIterate(femGrains *myGrains, double dt, int iter)
 				dv = dvContacts[iContact];
 			}
 			else {
-				vn = (vx[i] - vx[j])*nx + (vy[i] - vy[j])*ny;
-				gap = rr - (r[i] + r[j]);
-				dv = fmax(0.0, vn + dvContacts[iContact] - gap / dt);
-				dv = dv - dvContacts[iContact];
+				vn                    = (vx[i] - vx[j])*nx + (vy[i] - vy[j])*ny;
+				gap                   = rr - (r[i] + r[j]);
+				dv                    = fmax(0.0, vn + dvContacts[iContact] - gap / dt);
+				dv                    = dv - dvContacts[iContact];
 				dvContacts[iContact] += dv;
-				error = fmax(fabs(dv), error);
+				error                 = fmax(fabs(dv), error);
 			}
 			vx[i] -= dv * nx * m[j] / (m[i] + m[j]);
 			vy[i] -= dv * ny * m[j] / (m[i] + m[j]);
