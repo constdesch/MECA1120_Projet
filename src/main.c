@@ -50,7 +50,7 @@ int main(void)
     glfwMakeContextCurrent(window);
     int theRunningMode = 1;
     float theVelocityFactor = 0.25;
-    
+    int e,f, iteration = 0;
     do {
         int i,w,h;
         double currentTime = glfwGetTime();
@@ -80,8 +80,22 @@ int main(void)
             //          printf("press CR to compute the next time step >>");
             //          char c= getchar();
             //
+            
+            /*if (iteration != 0){
+            for(e = 0; e<theProblemU->system->size;e++){
+                for(f = 0; e<theProblemU->system->size;f++){
+                    theProblemU->system->A[e][f] = 0.0;
+                    theProblemV->system->A[e][f] = 0.0;
+                }
+                theProblemU->system->B[e] = 0.0;
+                theProblemV->system->B[e] = 0.0;
+                iteration ++;
+            }
+            }*/
+            /*theProblemU->system = femFullSystemCreate(theProblemU->mesh->nNode);
+            theProblemV->system = femFullSystemCreate(theProblemV->mesh->nNode);*/
             femGrainsUpdate(theGrains,dt,tol,iterMax, theProblemU,theProblemV);
-            femPoissonSolve(theProblemU,0, theGrains);
+            /*femPoissonSolve(theProblemU,0, theGrains);
             femPoissonSolve(theProblemV,1, theGrains);
             int j;
             B1 = theProblemU->system->B;
@@ -89,7 +103,7 @@ int main(void)
             for (j=0;j<theProblemU->system->size;j++){
                 B[j] = sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
             }
-            glfemPlotField(theProblemU->mesh,B);
+            glfemPlotField(theProblemU->mesh,B);*/
             t += dt; }
         
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {
