@@ -19,59 +19,59 @@
 #define ErrorScan(a)   femErrorScan(a,__LINE__,__FILE__)
 #define Error(a)       femError(a,__LINE__,__FILE__)
 #define Warning(a)     femWarning(a,  __LINE__, __FILE__)
-#define FALSE 0 
+#define FALSE 0
 #define TRUE  1
 
 typedef enum { FEM_TRIANGLE, FEM_QUAD } femElementType;
 
 typedef struct {
-	int *elem;
-	double *X;
-	double *Y;
+    int *elem;
+    double *X;
+    double *Y;
     double *area;
-	int nElem;
-	int nNode;
-	int nLocalNode;
+    int nElem;
+    int nNode;
+    int nLocalNode;
 } femMesh;
 
 typedef struct {
-	int elem[2];
-	int node[2];
+    int elem[2];
+    int node[2];
 } femEdge;
 
 typedef struct {
-	femMesh *mesh;
-	femEdge *edges;
-	int nEdge;
-	int nBoundary;
+    femMesh *mesh;
+    femEdge *edges;
+    int nEdge;
+    int nBoundary;
 } femEdges;
 
 typedef struct {
-	int n;
-	void(*x2)(double *xsi, double *eta);
-	void(*phi2)(double xsi, double eta, double *phi);
-	void(*dphi2dx)(double xsi, double eta, double *dphidxsi, double *dphideta);
+    int n;
+    void(*x2)(double *xsi, double *eta);
+    void(*phi2)(double xsi, double eta, double *phi);
+    void(*dphi2dx)(double xsi, double eta, double *dphidxsi, double *dphideta);
 } femDiscrete;
 
 typedef struct {
-	int n;
-	const double *xsi;
-	const double *eta;
-	const double *weight;
+    int n;
+    const double *xsi;
+    const double *eta;
+    const double *weight;
 } femIntegration;
 
 typedef struct {
-	double *B;
-	double **A;
-	int size;
+    double *B;
+    double **A;
+    int size;
 } femFullSystem;
 
 typedef struct {
-	femMesh *mesh;
-	femEdges *edges;
-	femDiscrete *space;
-	femIntegration *rule;
-	femFullSystem *system;
+    femMesh *mesh;
+    femEdges *edges;
+    femDiscrete *space;
+    femIntegration *rule;
+    femFullSystem *system;
 } femPoissonProblem;
 
 
@@ -113,7 +113,7 @@ typedef struct {
     double gamma;
     double *x;
     double *y;
-    int *elem; /*tableau d'appartenance a un element*/ 
+    int *elem; /*tableau d'appartenance a un element*/
     double *vx;
     double *vy;
     double *r;
@@ -126,7 +126,7 @@ typedef struct {
 femGrains  *femGrainsCreateSimple(int n, double r, double m, double radiusIn, double radiusOut);
 femGrains  *femGrainsCreateTiny(double radiusIn, double radiusOut);
 void        femGrainsFree(femGrains *myGrains);
-void        femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax, femPoissonProblem *theProblem);
+void        femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax, femPoissonProblem *theProblem,femPoissonProblem* theProblemV);
 double      femGrainsContactIterate(femGrains *myGrains, double dt, int iter);
 
 
@@ -147,4 +147,5 @@ void        femWarning(char *text, int line, char *file);
 void area (femPoissonProblem *theProblem);
 void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains);
 int withinTriangle(double xc, double yc, double area, double *px, double *py);
+double* femDiscreteinvetaxsi(double xc, double yc, double x[4], double y[4]);
 #endif
