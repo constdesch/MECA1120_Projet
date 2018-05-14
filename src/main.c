@@ -16,11 +16,11 @@ int main(void)
 {
     
     int    n         = 15;
-    double radius    = 0.1;
+    double radius    = 0.05;
     double mass      = 0.1;
     double radiusIn  = 0.4;
     double radiusOut = 2.0;
-    double dt        = 1e-1;
+    double dt        = 1e-2;
     double tEnd      = 8.0;
     double tol       = 1e-6;
     double t         = 0;
@@ -31,8 +31,7 @@ int main(void)
     
     femPoissonProblem* theProblemU = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
     femPoissonProblem* theProblemV = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
-    femPoissonSolve(theProblemU,0, theGrains);
-    femPoissonSolve(theProblemV,1, theGrains);
+    femPoissonSolve(theProblemU,theProblemV, theGrains);
     
     int i;
     double *B = malloc(sizeof(double) * theProblemU->system->size);
@@ -50,7 +49,7 @@ int main(void)
     glfwMakeContextCurrent(window);
     int theRunningMode = 1;
     float theVelocityFactor = 0.25;
-    int e,f, iteration = 0;
+    //int e,f, iteration = 0;
     do {
         int i,w,h;
         double currentTime = glfwGetTime();
@@ -82,28 +81,17 @@ int main(void)
             //
             
             /*if (iteration != 0){
-            for(e = 0; e<theProblemU->system->size;e++){
-                for(f = 0; e<theProblemU->system->size;f++){
-                    theProblemU->system->A[e][f] = 0.0;
-                    theProblemV->system->A[e][f] = 0.0;
-                }
-                theProblemU->system->B[e] = 0.0;
-                theProblemV->system->B[e] = 0.0;
-                iteration ++;
-            }
+
             }*/
-            /*theProblemU->system = femFullSystemCreate(theProblemU->mesh->nNode);
-            theProblemV->system = femFullSystemCreate(theProblemV->mesh->nNode);*/
             femGrainsUpdate(theGrains,dt,tol,iterMax, theProblemU,theProblemV);
-            /*femPoissonSolve(theProblemU,0, theGrains);
-            femPoissonSolve(theProblemV,1, theGrains);
+            femPoissonSolve(theProblemU, theProblemV, theGrains);
             int j;
             B1 = theProblemU->system->B;
             B2 = theProblemV->system->B;
             for (j=0;j<theProblemU->system->size;j++){
-                B[j] = sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
+                B[j] =  sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
             }
-            glfemPlotField(theProblemU->mesh,B);*/
+            glfemPlotField(theProblemU->mesh,B);
             t += dt; }
         
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {

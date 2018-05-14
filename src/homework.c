@@ -109,79 +109,68 @@ void femMeshLocal(const femMesh *theMesh, const int iElem, int *map, double *x, 
 
 # endif
 # ifndef NOPOISSONSOLVE
-void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrains)
+void femPoissonSolve(femPoissonProblem *theProblemU, femPoissonProblem *theProblemV, femGrains* theGrains)
 {
-    femMesh *theMesh = theProblem->mesh;
-    femEdges *theEdges = theProblem->edges;
-    femFullSystem *theSystem = theProblem->system;
-    femIntegration *theRule = theProblem->rule;
-    femDiscrete *theSpace = theProblem->space;
-    /*indexoftriangle(theProblem, theGrains);
-     int z;
-     for(z=0; theGrains->n;z++){
-     printf("%d ",theGrains->elem[z]);
-     }
-     printf("\n");*/
-    /*int elem;
-     printf("area : ");
-     for (elem=0; elem<theMesh->nElem;elem++){
-     printf("%f ",theMesh->area[elem]);
-     }
-     printf("\n"); */
+    femMesh *theMeshU = theProblemU->mesh;
+    femEdges *theEdgesU = theProblemU->edges;
+    femFullSystem *theSystemU = theProblemU->system;
+    femIntegration *theRuleU = theProblemU->rule;
+    femDiscrete *theSpaceU = theProblemU->space;
+    
+    femMesh *theMeshV = theProblemV->mesh;
+    femEdges *theEdgesV = theProblemV->edges;
+    femFullSystem *theSystemV = theProblemV->system;
+    femIntegration *theRuleV = theProblemV->rule;
+    femDiscrete *theSpaceV = theProblemV->space;
     
     
-    if (theSpace->n > 4) Error("Unexpected discrete space size !");
-    double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4], tau[4], gamma = 0.5, present, pos[2];
-    int iElem, iInteg, iEdge, i, j, map[4], k, exitflag;
-    for (i = 0; i < theGrains->n; i++) {
-        //    printf(" %d ", theGrains->elem[i]);
+    int e,f;
+    for(e = 0; e < theSystemU->size;e++){
+        for(f = 0; f < theSystemU->size;f++){
+            theProblemU->system->A[e][f] = 0.0;
+            theProblemV->system->A[e][f] = 0.0;
+        }
+        theProblemU->system->B[e] = 0.0;
+        theProblemV->system->B[e] = 0.0;
     }
-    for (iElem = 0; iElem < theMesh->nElem; iElem++) {
-        femMeshLocal(theMesh, iElem, map, x, y);
-        present = 0.0;
+    
+    
+    if (theSpaceU->n > 4) Error("Unexpected discrete space size !");
+    double x[4], y[4], phi[4], dphidxsi[4], dphideta[4], dphidx[4], dphidy[4], tau[4], gamma = 0.5, presentU, presentV, pos[2], mu = 1.0;
+    int iElem, iInteg, iEdge, i, j, map[4], k, exitflag;
+    for (iElem = 0; iElem < theMeshU->nElem; iElem++) {
+        femMeshLocal(theMeshU, iElem, map, x, y);
+        presentU = 0.0;
+        presentV = 0.0;
         exitflag = 0;
-        
         for (k= 0; k < theGrains->n && exitflag==0; k++) {
             if (iElem == theGrains->elem[k]) {
-                if (flag == 0) {
-                    present = theGrains->vx[k];
-                    exitflag++;
-                    pos[0] = theGrains->x[k];
-                    pos[1] = theGrains->y[k];
-                    
-                }
-                else {
-                    present = theGrains->vy[k];
-                    printf(" %d ", theGrains->elem[k]);
-                    exitflag++;
-                    pos[0] = theGrains->x[k];
-                    pos[1] = theGrains->y[k];
-                }
+                presentU = theGrains->vx[k];
+                presentV = theGrains->vy[k];
+                pos[0] = theGrains->x[k];
+                pos[1] = theGrains->y[k];
+                exitflag++;
             }
         }
-        /*printf("present : %f\n",present);*/
-        for (iInteg = 0; iInteg < theRule->n; iInteg++) {
-            double xsi = theRule->xsi[iInteg];
-            double eta = theRule->eta[iInteg];
-            if (exitflag == 1) {
+        for (iInteg = 0; iInteg < theRuleU->n; iInteg++) {
+            double xsi = theRuleU->xsi[iInteg];
+            double eta = theRuleU->eta[iInteg];
+            if (exitflag != 0) {
                 double *tab;
                 tab=femDiscreteinvetaxsi(pos[0], pos[1], x, y);
-                femDiscretePhi2(theSpace, tab[0],tab[1] ,tau);
+                femDiscretePhi2(theSpaceU, tab[0],tab[1] ,tau);
                 free(tab);
-                printf("hey bro [%f %f %f]\n",tau[0],tau[1],tau[2]);
             }
-            double xx = x[iInteg];
-            double yy = y[iInteg];
-            double weight = theRule->weight[iInteg];
-            femDiscretePhi2(theSpace, xsi, eta, phi);
-            femDiscreteDphi2(theSpace, xsi, eta, dphidxsi, dphideta);
+            double weight = theRuleU->weight[iInteg];
+            femDiscretePhi2(theSpaceU, xsi, eta, phi);
+            femDiscreteDphi2(theSpaceU, xsi, eta, dphidxsi, dphideta);
             double dxdxsi = 0.0;
             double dxdeta = 0.0;
             double dydxsi = 0.0;
             double dydeta = 0.0;
             double xloc = 0.0;
             double yloc = 0.0;
-            for (i = 0; i < theSpace->n; i++) {
+            for (i = 0; i < theSpaceU->n; i++) {
                 xloc   += x[i] * phi[i];
                 yloc   += y[i] * phi[i];
                 dxdxsi += x[i] * dphidxsi[i];
@@ -190,72 +179,56 @@ void femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains* theGrai
                 dydeta += y[i] * dphideta[i];
             }
             double jac = fabs(dxdxsi * dydeta - dxdeta * dydxsi);
-            for (i = 0; i < theSpace->n; i++) {
+            for (i = 0; i < theSpaceU->n; i++) {
                 dphidx[i] = (dphidxsi[i] * dydeta - dphideta[i] * dydxsi) / jac;
                 dphidy[i] = (dphideta[i] * dxdxsi - dphidxsi[i] * dxdeta) / jac;
             }
             
-            for (i = 0; i < theSpace->n; i++) {
-                for (j = 0; j < theSpace->n; j++) {
+            for (i = 0; i < theSpaceU->n; i++) {
+                for (j = 0; j < theSpaceU->n; j++) {
                     if (exitflag!=0) {
-                        theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight+ gamma*tau[i] * tau[j] * jac;
+                        theSystemU->A[map[i]][map[j]] += mu * (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight+ gamma*tau[i] * tau[j];
+                        theSystemV->A[map[i]][map[j]] += mu * (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight+ gamma*tau[i] * tau[j];
                     }
-                    else
-                        theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
+                    else{
+                        theSystemU->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;
+                        theSystemV->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight;}
                 }
-                if (present!=0)
-                    theSystem->B[map[i]] += gamma*tau[i] * present;
+                theSystemU->B[map[i]] += gamma*tau[i] * presentU;
+                theSystemV->B[map[i]] += gamma*tau[i] * presentV;
             }
         }
     }
     
-    for (iEdge = 0; iEdge < theEdges->nEdge; iEdge++) {
-        if (theEdges->edges[iEdge].elem[1] < 0) {
+    for (iEdge = 0; iEdge < theEdgesU->nEdge; iEdge++) {
+        if (theEdgesU->edges[iEdge].elem[1] < 0) {
             for (i = 0; i < 2; i++) {
                 double rOut = 2.0;//theGrains->radiusOut;
                 double rIn = 0.4;//theGrains->radiusIn;
-                int iNode = theEdges->edges[iEdge].node[i];
-                double xloc = theMesh->X[iNode];
-                double yloc = theMesh->Y[iNode];
-                double r = sqrt(xloc*xloc + yloc * yloc);
-                /*double R = rOut * rOut;
-                 double gap = R - rIn * rIn;
-                 double vext = 3.0;
-                 double vr = R * vext*(r / gap + 1 / r * (1 - R / gap));
-                 */
+                int iNode = theEdgesU->edges[iEdge].node[i];
+                double xlocU = theMeshU->X[iNode];
+                double ylocU = theMeshU->Y[iNode];
+                double xlocV = theMeshV->X[iNode];
+                double ylocV = theMeshV->Y[iNode];
+                double r = sqrt(xlocU*xlocU + ylocU * ylocU);
                 double vext = 3.0;
                 if (r <= rIn) {
-                    double vx = 0;
-                    femFullSystemConstrain(theSystem, iNode, vx);
+                    double vx = 0.0;
+                    femFullSystemConstrain(theSystemU, iNode, 0);
                 }
                 else {
-                    if (flag == 0) {
-                        double vx =vext *yloc/rOut ;
-                        femFullSystemConstrain(theSystem, iNode, vx);
-                    }
-                    else
-                    {
-                        double vy =- vext *xloc/rOut;
-                        femFullSystemConstrain(theSystem, iNode, vy);
-                    }
+                    double vx =vext *ylocU/rOut ;
+                    femFullSystemConstrain(theSystemU, iNode, vx);
+
+                    double vy =- vext *xlocV/rOut;
+                    femFullSystemConstrain(theSystemV, iNode, vy);
                 }
-                /*if ((xloc * xloc + yloc*yloc) < (radiusOut*radiusOut)) femFullSystemConstrain(theSystem, iNode, 0.0);
-                 else {
-                 double vext = 3.0;
-                 if (flag == 0){
-                 double vx = vext * yloc / radiusOut;
-                 femFullSystemConstrain(theSystem, iNode, vx);
-                 }
-                 if (flag == 1){
-                 double vy = -vext * xloc/radiusOut;
-                 femFullSystemConstrain(theSystem, iNode, vy);
-                 }
-                 }*/
             }
         }
     }
     
-    femFullSystemEliminate(theSystem);
+    femFullSystemEliminate(theSystemU);
+    femFullSystemEliminate(theSystemV);
 }
 
 

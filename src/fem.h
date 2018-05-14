@@ -132,7 +132,7 @@ double      femGrainsContactIterate(femGrains *myGrains, double dt, int iter);
 
 femPoissonProblem   *femPoissonCreate(const char *filename);
 void                 femPoissonFree(femPoissonProblem *theProblem);
-void                 femPoissonSolve(femPoissonProblem *theProblem, int flag, femGrains *theGrains);
+void femPoissonSolve(femPoissonProblem *theProblemU, femPoissonProblem *theProblemV, femGrains* theGrains);
 
 
 double      femMin(double *x, int n);
