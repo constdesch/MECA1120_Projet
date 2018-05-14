@@ -111,6 +111,7 @@ void femMeshLocal(const femMesh *theMesh, const int iElem, int *map, double *x, 
 # ifndef NOPOISSONSOLVE
 void femPoissonSolve(femPoissonProblem *theProblemU, femPoissonProblem *theProblemV, femGrains* theGrains)
 {
+
     femMesh *theMeshU = theProblemU->mesh;
     femEdges *theEdgesU = theProblemU->edges;
     femFullSystem *theSystemU = theProblemU->system;
@@ -123,15 +124,13 @@ void femPoissonSolve(femPoissonProblem *theProblemU, femPoissonProblem *theProbl
     femIntegration *theRuleV = theProblemV->rule;
     femDiscrete *theSpaceV = theProblemV->space;
     
-    
+   
     int e,f;
     for(e = 0; e < theSystemU->size;e++){
         for(f = 0; f < theSystemU->size;f++){
             theProblemU->system->A[e][f] = 0.0;
             theProblemV->system->A[e][f] = 0.0;
         }
-        theProblemU->system->B[e] = 0.0;
-        theProblemV->system->B[e] = 0.0;
     }
     
     
@@ -212,9 +211,10 @@ void femPoissonSolve(femPoissonProblem *theProblemU, femPoissonProblem *theProbl
                 double ylocV = theMeshV->Y[iNode];
                 double r = sqrt(xlocU*xlocU + ylocU * ylocU);
                 double vext = 3.0;
-                if (r <= rIn) {
+                if (r <(rOut-rIn)) {
                     double vx = 0.0;
                     femFullSystemConstrain(theSystemU, iNode, 0);
+                    femFullSystemConstrain(theSystemV, iNode, 0);
                 }
                 else {
                     double vx =vext *ylocU/rOut ;
@@ -313,6 +313,7 @@ double femGrainsContactIterate(femGrains *myGrains, double dt, int iter)
 
 void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax, femPoissonProblem *theProblemU,femPoissonProblem* theProblemV)
 {
+  
     int i;
     int n = myGrains->n;
     
@@ -341,7 +342,7 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax,
                 uu[j] = theProblemU->system->B[map[j]];
                 vv[j] = theProblemV->system->B[map[j]];
             }
-            if (withinTriangle(x[i], y[i], 1, xc, yc) == 1) {
+            if (withinTriangle(x[i], y[i], theProblemU->mesh->area[iElem], xc, yc) == 1) {
                 double *tab;
                 double tau[3];
                 tab = femDiscreteinvetaxsi(x[i], y[i], xc, yc);

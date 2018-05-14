@@ -16,11 +16,11 @@ int main(void)
 {
     
     int    n         = 15;
-    double radius    = 0.05;
+    double radius    = 0.1;
     double mass      = 0.1;
     double radiusIn  = 0.4;
     double radiusOut = 2.0;
-    double dt        = 1e-2;
+    double dt        = 0.01;
     double tEnd      = 8.0;
     double tol       = 1e-6;
     double t         = 0;
@@ -35,11 +35,11 @@ int main(void)
     
     int i;
     double *B = malloc(sizeof(double) * theProblemU->system->size);
-    double *B1 = theProblemU->system->B;
+    /*double *B1 = theProblemU->system->B;
     double *B2 = theProblemV->system->B;
     for (i=0;i<theProblemU->system->size;i++){
         B[i] = sqrt(B1[i]*B1[i] + B2[i]*B2[i]);
-    }
+    }*/
     
     
     //  A decommenter pour obtenir l'exemple de la seance d'exercice :-)
@@ -51,6 +51,13 @@ int main(void)
     float theVelocityFactor = 0.25;
     //int e,f, iteration = 0;
     do {
+        int j;
+         //double *B = malloc(sizeof(double)* theProblemU->system->size);
+         double *B1 = theProblemU->system->B;
+         double *B2 = theProblemV->system->B;
+         for (j=0;j<theProblemU->system->size;j++){
+         B[j] =  sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
+         }
         int i,w,h;
         double currentTime = glfwGetTime();
         
@@ -84,13 +91,9 @@ int main(void)
 
             }*/
             femGrainsUpdate(theGrains,dt,tol,iterMax, theProblemU,theProblemV);
+            femFullSystemInit(theProblemU->system);
+            femFullSystemInit(theProblemV->system);
             femPoissonSolve(theProblemU, theProblemV, theGrains);
-            int j;
-            B1 = theProblemU->system->B;
-            B2 = theProblemV->system->B;
-            for (j=0;j<theProblemU->system->size;j++){
-                B[j] =  sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
-            }
             glfemPlotField(theProblemU->mesh,B);
             t += dt; }
         
