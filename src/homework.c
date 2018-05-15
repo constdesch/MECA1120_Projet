@@ -23,50 +23,15 @@ int DeltaPointTriangle(double *x, double *y, double xc, double yc, double Aire) 
     double aire2 = 1 / 2 * area(x[0],xc,x[2],y[0],yc,y[2]);
     double aire3 = 1 / 2 * area(x[0],x[1],xc,y[0],y[1],yc);
     double s = aire1 + aire2 + aire3;
-    return (Aire == s); 
+    return (Aire == s);
 }
-/*int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
-{
-    
-    double ABC = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
-    double PBC = 1 / 2 * fabs((xb - xp)*(yc - yp) - (xc - xp)*(yb - yp));
-    double APC = 1 / 2 * fabs((xp - xa)*(yc - ya) - (xc - xa)*(yp - ya));
-    double ABP = 1 / 2 * fabs((xb - xa)*(yp - ya) - (xp - xa)*(yb - ya));
-    
-    double Somme = PBC + APC + ABP;
-    
-    if (Somme == ABC) return 1;
-    
-    else return 0;
-    
-}*/
-
-
-
-double invksi(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3)
-{
-    return ((x - X1)*(Y3 - Y1) - (y - Y1)*(X3 - X1)) / ((X2 - X1)*(Y3 - Y1) - (Y2 - Y1)*(X3 - X1));
-    //return (y - Y1 - (Y2 - Y1)*inveta(x, y, X1, Y1, X2, Y2, X3, Y3)) / (Y2 - Y1);
+void invefctforme(femPoissonProblem *theProblem, double xx, double yy, double *x, double *y, double *tau) {
+    double *tab = malloc(sizeof(double) * 2);
+    tab[0] = ((xx - x[0])*(y[2] - y[0]) - (yy - y[0])*(x[2] - x[0])) / ((x[1] - x[0])*(y[2] - y[0]) - (y[1] - y[0])*(x[2] - x[0]));
+    tab[1] = ((xx - x[0])*(y[0] - y[1]) - (yy - y[0])*(x[0] - x[1])) / ((x[1] - x[0])*(y[2] - y[0]) - (y[1] - y[0])*(x[2] - x[0]));
+    femDiscretePhi2(theProblem->space, tab[0], tab[1], tau);
+    free(tab);
 }
-
-
-double inveta(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3)
-{
-    return ((x - X1)*(Y1 - Y2) - (y - Y1)*(X1 - X2)) / ((X2 - X1)*(Y3 - Y1) - (Y2 - Y1)*(X3 - X1));
-    
-    
-    //return (y - Y1 - (Y2 - Y1)*invksi(x, y, X1, Y1, X2, Y2, X3, Y3)) / (Y3 - Y1);
-}
-
-
-void invtau(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3, double* invtau)
-{
-    invtau[0] = 1-invksi(x, y, X1, Y1, X2, Y2, X3,Y3)-inveta(x, y, X1, Y1, X2, Y2, X3, Y3);
-    invtau[1] = invksi(x, y, X1, Y1, X2, Y2, X3, Y3);
-    invtau[2] = inveta(x, y, X1, Y1, X2, Y2, X3, Y3);
-    
-}
-
 
 
 # ifndef NOCONTACTITERATE
@@ -158,7 +123,7 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax,
     
     double xt[3], yt[3], uLoc[3], vLoc[3],tau[3];
     int mapt[3];
-    double uxy, vxy;
+    double uxy = 0.0, vxy = 0.0;
     
     //-1- Calcul des nouvelles vitesses des grains sur base de la gravite et de la trainee
     for (i = 0; i < n; i++) {
@@ -171,12 +136,12 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax,
                 uLoc[j] = Problemu->system->B[mapt[j]];
                 vLoc[j] = Problemv->system->B[mapt[j]];
             }
-            //  ‡ priori sert ‡ qued ici DeltaPointTriangle(xt[0], yt[0], xt[1], yt[1], xt[2], yt[2], x[i], y[i])*
+            if( DeltaPointTriangle(xt, yt, x[i], y[i],area) ){
+                invefctforme(Problemu, x[i], y[i], xt, yt,tau);
             
-            invtau(x[i], y[i], xt[0], yt[0], xt[1], yt[1], xt[2], yt[2], tau);
-            
-            uxy = DeltaPointTriangle(xt, yt, x[i], y[i],area)*(tau[0] * uLoc[0] + tau[1] * uLoc[1] + tau[2] * uLoc[2]);
-            vxy = DeltaPointTriangle(xt, yt,x[i], y[i],area)*(tau[0] * vLoc[0] + tau[1] * vLoc[1] + tau[2] * vLoc[2]);
+                uxy = tau[0] * uLoc[0] + tau[1] * uLoc[1] + tau[2] * uLoc[2];
+                vxy = tau[0] * vLoc[0] + tau[1] * vLoc[1] + tau[2] * vLoc[2];
+            }
             
             vx[i] += - gamma * dt / m[i] * (vx[i] - uxy);
             vy[i] += (m[i] * gy - gamma * (vy[i] - vxy)) * dt / m[i];
@@ -283,7 +248,7 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
     int nGrains = myGrains->n;
     double gamma = myGrains->gamma;
     
-    double x[3], y[3], phi[3], dphidxsi[3], dphideta[3], dphidx[3], dphidy[3], tauetoile[3];
+    double x[3], y[3], phi[3], dphidxsi[3], dphideta[3], dphidx[3], dphidy[3], tau[3];
     int iElem, iInteg, iEdge, i, j, k, map[3];
     
     
@@ -328,15 +293,16 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
         }
         
         for (k = 0; k < nGrains; k++) {
-            invtau(xg[k], yg[k], x[0], y[0], x[1], y[1], x[2], y[2], tauetoile);
-            for (i = 0; i < 3; i++) {
-                for (j = 0; j < 3; j++) {
-                    theSystemU->A[map[i]][map[j]] += DeltaPointTriangle(x,y,xg[k],yg[k],area)*gamma*tauetoile[i] * tauetoile[j];
-                    theSystemV->A[map[i]][map[j]] += DeltaPointTriangle(x,y,xg[k], yg[k],area)*gamma*tauetoile[i] * tauetoile[j];
+            if(DeltaPointTriangle(x,y,xg[k],yg[k],area)){
+                invefctforme(theProblemU, xg[k], yg[k], x, y, tau);
+                for (i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        theSystemU->A[map[i]][map[j]] += gamma*tau[i] * tau[j];
+                        theSystemV->A[map[i]][map[j]] += gamma*tau[i] * tau[j];
+                    }
+                    theSystemU->B[map[i]] += gamma * tau[i] * vx[k];
+                    theSystemV->B[map[i]] += gamma * tau[i] * vy[k];
                 }
-                theSystemU->B[map[i]] += DeltaPointTriangle(x,y, xg[k], yg[k],area)*gamma * tauetoile[i] * vx[k];
-                theSystemV->B[map[i]] += DeltaPointTriangle(x,y, xg[k], yg[k],area)*gamma * tauetoile[i] * vy[k];
-                
             }
         }
     }

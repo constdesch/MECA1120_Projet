@@ -152,5 +152,6 @@ int DeltaPointTriangle(double *x, double *y, double xc, double  yc, double Aire)
 double invksi(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3);
 double inveta(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3);
 void invtau(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3, double* invtau);
+void invefctforme(femPoissonProblem *theProblem, double xx, double yy, double *x, double *y, double *tau);
 
 #endif
