@@ -148,11 +148,9 @@ void area (femPoissonProblem *theProblem);
 void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains);
 int withinTriangle(double xc, double yc, double area, double *px, double *py);
 double* femDiscreteinvetaxsi(double xc, double yc, double x[4], double y[4]);*/
-int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp);
+int DeltaPointTriangle(double *x, double *y, double xc, double  yc, double Aire);
 double invksi(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3);
 double inveta(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3);
-double DeltaPointTriangle2(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp);
-double DeltaPointTriangle3(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp);
 void invtau(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3, double* invtau);
 
 #endif

@@ -15,11 +15,18 @@ void ComputeArea (femPoissonProblem *theProblem){
         femMeshLocal(theMesh, elem, map, x, y);
         double xa = x[0], xb = x[1], xc = x[2];
         double ya = y[0], yb = y[1], yc = y[2];
-        theMesh->area[elem] = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
+        theProblem->area[elem] = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
     }
 }
-
-int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
+int DeltaPointTriangle(double *x, double *y, double xc, double yc, double Aire) {
+    double aire1 = 1 / 2 * fabs((x[1] - xc)*(y[2] - yc) - (x[2] - xc)*(y[1] - yc));
+    double aire2 = 1 / 2 * fabs((xc - x[0])*(y[2] - y[0]) - (x[2] - x[0])*(yc - y[0]));
+    double aire3 = 1 / 2 * fabs((x[1] - x[0])*(yc - y[0]) - (xc - x[0])*(y[1] - y[0]));
+    double s = aire1 + aire2 + aire3;
+    if (Aire == s) return 1;
+    else return 0;
+}
+/*int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
 {
     
     double ABC = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
@@ -33,7 +40,7 @@ int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, do
     
     else return 0;
     
-}
+}*/
 
 
 
@@ -52,38 +59,6 @@ double inveta(double x, double y, double X1, double Y1, double X2, double Y2, do
     //return (y - Y1 - (Y2 - Y1)*invksi(x, y, X1, Y1, X2, Y2, X3, Y3)) / (Y3 - Y1);
 }
 
-
-
-double DeltaPointTriangle2(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
-{
-    
-    double ksi = invksi(xp, yp, xa, ya, xb, yb, xc, yc);
-    double eta = inveta(xp, yp, xa, ya, xb, yb, xc, yc);
-    
-    
-    if (ksi<0 || ksi >1 || eta<0 || eta > 1 - ksi) return 0;
-    
-    else return 1;
-    
-}
-
-
-double DeltaPointTriangle3(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
-{
-    
-    double ABC = 1 / 2 * fabs(((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya)));
-    double PBC = 1 / 2 * fabs(((xb - xp)*(yc - yp) - (xc - xp)*(yb - yp)));
-    double APC = 1 / 2 * fabs(((xp - xa)*(yc - ya) - (xc - xa)*(yp - ya)));
-    double ABP = 1 / 2 * fabs(((xb - xa)*(yp - ya) - (xp - xa)*(yb - ya)));
-    double beta = ABC * APC;
-    double phi = ABP * PBC;
-    double delta = APC * PBC;
-    
-    if (beta >= 0 && phi >= 0 && delta >= 0) return 1;
-    
-    else return 0;
-    
-}
 
 void invtau(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3, double* invtau)
 {
@@ -190,6 +165,7 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax,
     for (i = 0; i < n; i++) {
         for (iElem = 0; iElem < Problemu->mesh->nElem; iElem++) {
             femMeshLocal(Problemu->mesh, iElem, mapt, xt, yt);
+            double area = Problemu->area[iElem];
             
             for (j = 0; j < 3; j++) {
                 
@@ -200,8 +176,8 @@ void femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax,
             
             invtau(x[i], y[i], xt[0], yt[0], xt[1], yt[1], xt[2], yt[2], tau);
             
-            uxy = DeltaPointTriangle(xt[0], yt[0], xt[1], yt[1], xt[2], yt[2], x[i], y[i])*(tau[0] * uLoc[0] + tau[1] * uLoc[1] + tau[2] * uLoc[2]);
-            vxy = DeltaPointTriangle(xt[0], yt[0], xt[1], yt[1], xt[2], yt[2], x[i], y[i])*(tau[0] * vLoc[0] + tau[1] * vLoc[1] + tau[2] * vLoc[2]);
+            uxy = DeltaPointTriangle(xt, yt, x[i], y[i],area)*(tau[0] * uLoc[0] + tau[1] * uLoc[1] + tau[2] * uLoc[2]);
+            vxy = DeltaPointTriangle(xt, yt,x[i], y[i],area)*(tau[0] * vLoc[0] + tau[1] * vLoc[1] + tau[2] * vLoc[2]);
             
             vx[i] += - gamma * dt / m[i] * (vx[i] - uxy);
             vy[i] += (m[i] * gy - gamma * (vy[i] - vxy)) * dt / m[i];
@@ -356,11 +332,11 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
             invtau(xg[k], yg[k], x[0], y[0], x[1], y[1], x[2], y[2], tauetoile);
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
-                    theSystemU->A[map[i]][map[j]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma*tauetoile[i] * tauetoile[j];
-                    theSystemV->A[map[i]][map[j]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma*tauetoile[i] * tauetoile[j];
+                    theSystemU->A[map[i]][map[j]] += DeltaPointTriangle(x,y,xg[k],yg[k],area)*gamma*tauetoile[i] * tauetoile[j];
+                    theSystemV->A[map[i]][map[j]] += DeltaPointTriangle(x,y,xg[k], yg[k],area)*gamma*tauetoile[i] * tauetoile[j];
                 }
-                theSystemU->B[map[i]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma * tauetoile[i] * vx[k];
-                theSystemV->B[map[i]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma * tauetoile[i] * vy[k];
+                theSystemU->B[map[i]] += DeltaPointTriangle(x,y, xg[k], yg[k],area)*gamma * tauetoile[i] * vx[k];
+                theSystemV->B[map[i]] += DeltaPointTriangle(x,y, xg[k], yg[k],area)*gamma * tauetoile[i] * vy[k];
                 
             }
         }
