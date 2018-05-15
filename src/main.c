@@ -20,7 +20,7 @@ int main(void)
     double mass = 0.05;
     double radiusIn = 0.4;
     double radiusOut = 2.0;
-    double dt = 0.05;
+    double dt = 0.015;
     double tEnd = 5.0;
     double tol = 1e-6;
     double t = 0;
@@ -34,8 +34,9 @@ int main(void)
     femPoissonSolve(theProblemu, theProblemv, theGrains);
     
     
-    double* norme = malloc(sizeof(double)*theProblemu->mesh->nNode);
-    
+    double* B = malloc(sizeof(double)*theProblemu->mesh->nNode);
+    double* B1;
+    double* B2;
     int option=1;
     GLFWwindow* window = glfemInit("Projet meca");
     glfwMakeContextCurrent(window);
@@ -53,9 +54,11 @@ int main(void)
         if(option==1){
             
         for (i = 0; i < theProblemu->mesh->nNode; i++) {
-            norme[i] = pow(pow(theProblemu->system->B[i], 2) + pow(theProblemv->system->B[i], 2), 0.5);
+            B1 = theProblemu->system->B;
+            B2 = theProblemv->system->B;
+            B[i] = sqrt( (B1[i]*B1[i]) + (B2[i]*B2[i]) );
         }
-             glfemPlotField(theProblemu->mesh, norme);
+             glfemPlotField(theProblemu->mesh, B);
         }
       //glfwGetFramebufferSize(window,&w,&h);
        // glfemReshapeWindows(radiusOut,w,h);
@@ -63,8 +66,28 @@ int main(void)
         //glfemPlotField(theProblemu->mesh, theProblemv->system->B);
         //glfemPlotField(theProblemu->mesh, norme);
         for (i=0 ;i < theGrains->n; i++) {
-            glColor3f(1.0, 1.0, 1.0);
-            glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]); }
+            if(option==2){
+                if(sqrt(theGrains->vx[i]*theGrains->vx[i]+theGrains->vy[i]*theGrains->vy[i])<1.3){
+                     glColor3f(1.0, 1.0, 1.0);
+                glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);
+            }
+            else if (sqrt(theGrains->vx[i]*theGrains->vx[i]+theGrains->vy[i]*theGrains->vy[i])<1.6){
+                glColor3f(255, 165, 0.0);
+                glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);
+            }
+            else if (sqrt(theGrains->vx[i]*theGrains->vx[i]+theGrains->vy[i]*theGrains->vy[i])<1.9){
+                glColor3f(1.0, 0.0, 0.25f);
+                glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);}
+        else {
+            glColor3f(0.0, 0.0, 0.0);
+            glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);
+        }
+            }
+            else {
+                glColor3f(0.0, 0.0, 0.0);
+                glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);
+            }
+        }
         glColor3f(0,0,0); glfemDrawCircle(0,0,radiusOut);
         glColor3f(0,0,0); glfemDrawCircle(0,0,radiusIn);
         char theMessage[256];
@@ -84,6 +107,7 @@ int main(void)
             t += dt; }
         if(glfwGetKey(window,'V')==GLFW_PRESS) option=1;
         if(glfwGetKey(window,'S')==GLFW_PRESS) option=0;
+        if(glfwGetKey(window,'D')==GLFW_PRESS) option=2;
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {
             if (glfwGetKey(window,'R') == GLFW_PRESS)
                 theRunningMode = 1;
@@ -95,7 +119,7 @@ int main(void)
            glfwWindowShouldClose(window) != 1);
     
     
-    free(norme);
+    free(B);
     glfwTerminate();
     femGrainsFree(theGrains);
     femPoissonFree(theProblemu);

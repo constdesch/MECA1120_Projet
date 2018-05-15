@@ -12,10 +12,21 @@
 #include "fem.h"
 
 /* ===================== ADDED FUNCTIONS ==================== */
+
+/* @area: calcule l'aire du triangle dont les sommets sont A(xa,ya), B(xb,yb) et C(xc,yc)
+ * @pre: /
+ * @post: retourne l'aire du triangle
+ */
 double area (double xa, double xb, double xc, double ya, double yb, double yc){
     return 1 /2 * fabs( (xb - xa)*(yc - ya) - (xc - xa)*(yb - ya) );
 }
 
+/*
+ * @ComputeArea: Rempli le tableau theProblem->area qui contient les aires de chaque triangle du maillage
+ *               suivant la même numérotation que le tableau theProblem->elem
+ * @pre: theProblem->mesh != NULL et theProblem->mesh->nLocalNode == 3
+ * @post: /
+ */
 void ComputeArea (femPoissonProblem *theProblem){
     femMesh *theMesh = theProblem->mesh;
     int elem;
@@ -28,6 +39,13 @@ void ComputeArea (femPoissonProblem *theProblem){
         theProblem->area[elem] = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
     }
 }
+/*
+ * @WithinTriangle: vérifie si un point P(xc,yc) appartient à un triangle donc les abscices des sommets sont
+ *                  contenues dans *x et les ordonnées dans *y suivant la même numérotation. Aire est l'aire
+ *                  du triangle.
+ * @pre: x et y sont de taille 3, Aire > 0
+ * @post: retourne 1 si P appartient au triangle, 0 sinon.
+ */
 int WithinTriangle(double *x, double *y, double xc, double yc, double Aire) {
     double aire1 = 1 / 2 * area(xc, x[1],x[2],yc,y[1],y[2]);
     double aire2 = 1 / 2 * area(x[0],xc,x[2],y[0],yc,y[2]);
@@ -35,6 +53,13 @@ int WithinTriangle(double *x, double *y, double xc, double yc, double Aire) {
     double s = aire1 + aire2 + aire3;
     return (Aire == s);
 }
+/*
+ * @invefctforme: donne l'image du point P(xx,yy) évalué sur le triangle parent par les fonctions de forme. Il y a 3
+ *                fonctions de forme, tau est de taille 3 et contient l'image de chacune de ces fonctions.
+ * @pre: *tau, *x et *y de taille 3, theProblem != NULL,
+ * @post: /
+ *
+ */
 void invefctforme(femPoissonProblem *theProblem, double xx, double yy, double *x, double *y, double *tau) {
     double *tab = malloc(sizeof(double) * 2);
     tab[0] = ((xx - x[0])*(y[2] - y[0]) - (yy - y[0])*(x[2] - x[0])) / ((x[1] - x[0])*(y[2] - y[0]) - (y[1] - y[0])*(x[2] - x[0]));

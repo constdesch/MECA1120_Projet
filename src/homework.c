@@ -208,7 +208,6 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
     double mu = 1e-1;
     double *xg = myGrains->x;
     double *yg = myGrains->y;
-    double *m = myGrains->m;
     double *vy = myGrains->vy;
     double *vx = myGrains->vx;
     int nGrains = myGrains->n;
@@ -216,9 +215,6 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
     
     double x[3], y[3], phi[3], dphidxsi[3], dphideta[3], dphidx[3], dphidy[3], tau[3];
     int iElem, iInteg, iEdge, i, j, k, map[3];
-    
-    
-    
     
     for (iElem = 0; iElem < theMesh->nElem; iElem++) {
         femMeshLocal(theMesh, iElem, map, x, y);
@@ -234,17 +230,8 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
             double dxdeta = 0;
             double dydxsi = 0;
             double dydeta = 0;
-            double xloc = 0;
-            double yloc = 0;
-            for (i = 0; i < 3; i++) {
-                xloc += x[i] * phi[i];
-                yloc += y[i] * phi[i];
-                dxdxsi += x[i] * dphidxsi[i];
-                dxdeta += x[i] * dphideta[i];
-                dydxsi += y[i] * dphidxsi[i];
-                dydeta += y[i] * dphideta[i];
-            }
-            double jac = fabs(dxdxsi * dydeta - dxdeta * dydxsi);
+            
+            double jac = fabs((x[0]-x[1]) * (y[0]-y[2]) - (x[0]-x[2]) * (y[0]-y[1]));
             for (i = 0; i < 3; i++) {
                 dphidx[i] = (dphidxsi[i] * dydeta - dphideta[i] * dydxsi) / jac;
                 dphidy[i] = (dphideta[i] * dxdxsi - dphidxsi[i] * dxdeta) / jac;
