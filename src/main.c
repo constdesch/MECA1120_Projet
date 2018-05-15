@@ -17,7 +17,7 @@ int main(void)
 {
     int    n = 50;
     double radius = 0.05;
-    double mass = 0.1;
+    double mass = 0.05;
     double radiusIn = 0.4;
     double radiusOut = 2.0;
     double dt = 0.05;
@@ -36,8 +36,8 @@ int main(void)
     
     double* norme = malloc(sizeof(double)*theProblemu->mesh->nNode);
     
-    
-    GLFWwindow* window = glfemInit("Simulation multi-echelle de milieux granulaires immerges.");
+    int option=1;
+    GLFWwindow* window = glfemInit("Projet meca");
     glfwMakeContextCurrent(window);
     int theRunningMode = 1.0;
     float theVelocityFactor = 0.25;
@@ -46,18 +46,22 @@ int main(void)
         int i,w,h;
         double currentTime = glfwGetTime();
         
+       
+               glfwGetFramebufferSize(window,&w,&h);
+            glfemReshapeWindows(radiusOut,w,h);
         
-        
+        if(option==1){
+            
         for (i = 0; i < theProblemu->mesh->nNode; i++) {
             norme[i] = pow(pow(theProblemu->system->B[i], 2) + pow(theProblemv->system->B[i], 2), 0.5);
         }
-        
-        
-        glfwGetFramebufferSize(window,&w,&h);
-        glfemReshapeWindows(radiusOut,w,h);
+             glfemPlotField(theProblemu->mesh, norme);
+        }
+      //glfwGetFramebufferSize(window,&w,&h);
+       // glfemReshapeWindows(radiusOut,w,h);
         //glfemPlotField(theProblemu->mesh, theProblemu->system->B);
         //glfemPlotField(theProblemu->mesh, theProblemv->system->B);
-        glfemPlotField(theProblemu->mesh, norme);
+        //glfemPlotField(theProblemu->mesh, norme);
         for (i=0 ;i < theGrains->n; i++) {
             glColor3f(1.0, 1.0, 1.0);
             glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]); }
@@ -78,7 +82,8 @@ int main(void)
             femPoissonSolve(theProblemu, theProblemv, theGrains);
 
             t += dt; }
-        
+        if(glfwGetKey(window,'V')==GLFW_PRESS) option=1;
+        if(glfwGetKey(window,'S')==GLFW_PRESS) option=0;
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {
             if (glfwGetKey(window,'R') == GLFW_PRESS)
                 theRunningMode = 1;

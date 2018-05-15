@@ -256,18 +256,17 @@ void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProble
                     theSystemV->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight*mu;
                 }
             }
-        }
-        
-        for (k = 0; k < nGrains; k++) {
-            if(WithinTriangle(x,y,xg[k],yg[k],area)){
-                invefctforme(theProblemU, xg[k], yg[k], x, y, tau);
-                for (i = 0; i < 3; i++) {
-                    for (j = 0; j < 3; j++) {
-                        theSystemU->A[map[i]][map[j]] += gamma*tau[i] * tau[j];
-                        theSystemV->A[map[i]][map[j]] += gamma*tau[i] * tau[j];
+            for (k = 0; k < nGrains; k++) {
+                if(WithinTriangle(x,y,xg[k],yg[k],area)){
+                    invefctforme(theProblemU, xg[k], yg[k], x, y, tau);
+                    for (i = 0; i < 3; i++) {
+                        for (j = 0; j < 3; j++) {
+                            theSystemU->A[map[i]][map[j]] += gamma*tau[i] * tau[j];
+                            theSystemV->A[map[i]][map[j]] += gamma*tau[i] * tau[j];
+                        }
+                        theSystemU->B[map[i]] += gamma * tau[i] * vx[k];
+                        theSystemV->B[map[i]] += gamma * tau[i] * vy[k];
                     }
-                    theSystemU->B[map[i]] += gamma * tau[i] * vx[k];
-                    theSystemV->B[map[i]] += gamma * tau[i] * vy[k];
                 }
             }
         }
