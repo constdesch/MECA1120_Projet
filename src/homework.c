@@ -19,12 +19,11 @@ void ComputeArea (femPoissonProblem *theProblem){
     }
 }
 int DeltaPointTriangle(double *x, double *y, double xc, double yc, double Aire) {
-    double aire1 = 1 / 2 * fabs((x[1] - xc)*(y[2] - yc) - (x[2] - xc)*(y[1] - yc));
-    double aire2 = 1 / 2 * fabs((xc - x[0])*(y[2] - y[0]) - (x[2] - x[0])*(yc - y[0]));
-    double aire3 = 1 / 2 * fabs((x[1] - x[0])*(yc - y[0]) - (xc - x[0])*(y[1] - y[0]));
+    double aire1 = 1 / 2 * area(xc, x[1],x[2],yc,y[1],y[2]);
+    double aire2 = 1 / 2 * area(x[0],xc,x[2],y[0],yc,y[2]);
+    double aire3 = 1 / 2 * area(x[0],x[1],xc,y[0],y[1],yc);
     double s = aire1 + aire2 + aire3;
-    if (Aire == s) return 1;
-    else return 0;
+    return (Aire == s); 
 }
 /*int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
 {
