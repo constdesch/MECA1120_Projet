@@ -7,7 +7,6 @@
  *  All rights reserved.
  *
  */
-
 #ifndef _FEM_H_
 #define _FEM_H_
 
@@ -123,7 +122,7 @@ typedef struct {
 } femGrains;
 
 
-femGrains  *femGrainsCreateSimple(int n, double r, double m, double radiusIn, double radiusOut);
+femGrains  *femGrainsCreateSimple(int n, double r, double m, double radiusIn, double radiusOut, double gamma);
 femGrains  *femGrainsCreateTiny(double radiusIn, double radiusOut);
 void        femGrainsFree(femGrains *myGrains);
 void        femGrainsUpdate(femGrains *myGrains, double dt, double tol, double iterMax, femPoissonProblem *theProblem,femPoissonProblem* theProblemV);
@@ -132,8 +131,8 @@ double      femGrainsContactIterate(femGrains *myGrains, double dt, int iter);
 
 femPoissonProblem   *femPoissonCreate(const char *filename);
 void                 femPoissonFree(femPoissonProblem *theProblem);
-void femPoissonSolve(femPoissonProblem *theProblemU, femPoissonProblem *theProblemV, femGrains* theGrains);
-
+void femPoissonSolveu(femPoissonProblem *theProblem, double radiusIn, double radiusOut, double vext, double mu, femGrains *myGrains);
+void femPoissonSolvev(femPoissonProblem *theProblemu, double radiusIn, double radiusOut, double vext, double mu, femGrains *theGrains);
 
 double      femMin(double *x, int n);
 double      femMax(double *x, int n);
@@ -143,9 +142,16 @@ void        femWarning(char *text, int line, char *file);
 
 /* ADDED FUNCTIONS */
 
-/* @area: calcule l'aire de chaque triangle et la stocke dans un tableau 'double *area' */
+/* @area: calcule l'aire de chaque triangle et la stocke dans un tableau 'double *area'
 void area (femPoissonProblem *theProblem);
 void indexoftriangle(femPoissonProblem* theProblem, femGrains* theGrains);
 int withinTriangle(double xc, double yc, double area, double *px, double *py);
-double* femDiscreteinvetaxsi(double xc, double yc, double x[4], double y[4]);
+double* femDiscreteinvetaxsi(double xc, double yc, double x[4], double y[4]);*/
+double DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp);
+double invksi(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3);
+double inveta(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3);
+double DeltaPointTriangle2(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp);
+double DeltaPointTriangle3(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp);
+void invtau(double x, double y, double X1, double Y1, double X2, double Y2, double X3, double Y3, double* invtau);
+
 #endif

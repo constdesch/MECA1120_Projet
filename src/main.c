@@ -12,65 +12,60 @@
 
 #include "glfem.h"
 
+
 int main(void)
 {
-    
-    int    n         = 15;
-    double radius    = 0.1;
-    double mass      = 0.1;
-    double radiusIn  = 0.4;
+    int    n = 50;
+    double radius = 0.05;
+    double mass = 0.1;
+    double radiusIn = 0.4;
     double radiusOut = 2.0;
-    double dt        = 0.01;
-    double tEnd      = 8.0;
-    double tol       = 1e-6;
-    double t         = 0;
-    double iterMax   = 100;
-    femGrains* theGrains = femGrainsCreateSimple(n,radius,mass,radiusIn,radiusOut);
-    
-    
-    
-    femPoissonProblem* theProblemU = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
-    femPoissonProblem* theProblemV = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
-    femPoissonSolve(theProblemU,theProblemV, theGrains);
+    double vext = 5;
+    double dt = 0.05;
+    double tEnd = 5.0;
+    double tol = 1e-6;
+    double t = 0;
+    double iterMax = 100;
+    double gamma = 0.6;
+    double mu = 1e-3; //1.8e-3;
     
     int i;
-    double *B = malloc(sizeof(double) * theProblemU->system->size);
-    /*double *B1 = theProblemU->system->B;
-    double *B2 = theProblemV->system->B;
-    for (i=0;i<theProblemU->system->size;i++){
-        B[i] = sqrt(B1[i]*B1[i] + B2[i]*B2[i]);
-    }*/
+    
+    femPoissonProblem* theProblemu = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
+    femPoissonProblem* theProblemv = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
+    
+    femGrains* theGrains = femGrainsCreateSimple(n, radius, mass, radiusIn, radiusOut, gamma);
+    femPoissonSolveu(theProblemu, radiusIn, radiusOut, vext, mu, theGrains);
+    femPoissonSolvev(theProblemv, radiusIn, radiusOut, vext, mu, theGrains);
     
     
-    //  A decommenter pour obtenir l'exemple de la seance d'exercice :-)
-    //femGrains* theGrains = femGrainsCreateTiny(radiusIn,radiusOut);;
+    double* norme = malloc(sizeof(double)*theProblemu->mesh->nNode);
     
-    GLFWwindow* window = glfemInit("MECA1120 : Projet final");
+    
+    GLFWwindow* window = glfemInit("Simulation multi-echelle de milieux granulaires immerges.");
     glfwMakeContextCurrent(window);
-    int theRunningMode = 1;
+    int theRunningMode = 1.0;
     float theVelocityFactor = 0.25;
-    //int e,f, iteration = 0;
+    
     do {
-        int j;
-         //double *B = malloc(sizeof(double)* theProblemU->system->size);
-         double *B1 = theProblemU->system->B;
-         double *B2 = theProblemV->system->B;
-         for (j=0;j<theProblemU->system->size;j++){
-         B[j] =  sqrt(B1[j]*B1[j] + B2[j]*B2[j]);
-         }
         int i,w,h;
         double currentTime = glfwGetTime();
         
+        
+        
+        for (i = 0; i < theProblemu->mesh->nNode; i++) {
+            norme[i] = pow(pow(theProblemu->system->B[i], 2) + pow(theProblemv->system->B[i], 2), 0.5);
+        }
+        
+        
         glfwGetFramebufferSize(window,&w,&h);
         glfemReshapeWindows(radiusOut,w,h);
-        
-        
-        glfemPlotField(theProblemU->mesh,B);
-        
+        //glfemPlotField(theProblemu->mesh, theProblemu->system->B);
+        //glfemPlotField(theProblemu->mesh, theProblemv->system->B);
+        glfemPlotField(theProblemu->mesh, norme);
         for (i=0 ;i < theGrains->n; i++) {
-            glColor3f(1,0,0.85f); glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]);
-            glColor3f(0, 0, 0); glfemDrawCircle(theGrains->x[i], theGrains->y[i], theGrains->r[i]);
-        }
+            glColor3f(1.0, 1.0, 1.0);
+            glfemDrawDisk(theGrains->x[i],theGrains->y[i],theGrains->r[i]); }
         glColor3f(0,0,0); glfemDrawCircle(0,0,radiusOut);
         glColor3f(0,0,0); glfemDrawCircle(0,0,radiusIn);
         char theMessage[256];
@@ -81,20 +76,12 @@ int main(void)
         
         if (t < tEnd && theRunningMode == 1) {
             printf("Time = %4g : ",t);
-            //
-            // A decommenter pour pouvoir progresser pas par pas
-            //          printf("press CR to compute the next time step >>");
-            //          char c= getchar();
-            //
             
-            /*if (iteration != 0){
-
-            }*/
-            femGrainsUpdate(theGrains,dt,tol,iterMax, theProblemU,theProblemV);
-            femFullSystemInit(theProblemU->system);
-            femFullSystemInit(theProblemV->system);
-            femPoissonSolve(theProblemU, theProblemV, theGrains);
-            glfemPlotField(theProblemU->mesh,B);
+            femGrainsUpdate(theGrains, dt, tol, iterMax, theProblemu, theProblemv);
+            femFullSystemInit(theProblemu->system);
+            femFullSystemInit(theProblemv->system);
+            femPoissonSolveu(theProblemu, radiusIn, radiusOut, vext, mu, theGrains);
+            femPoissonSolvev(theProblemv, radiusIn, radiusOut, vext, mu, theGrains);
             t += dt; }
         
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {
@@ -105,14 +92,15 @@ int main(void)
         
     }
     while (glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-           (!glfwWindowShouldClose(window)));
+           glfwWindowShouldClose(window) != 1);
     
     
+    free(norme);
     glfwTerminate();
-    free(B);
     femGrainsFree(theGrains);
+    femPoissonFree(theProblemu);
+    femPoissonFree(theProblemv);
     exit(EXIT_SUCCESS);
+    
 }
-
-
 
