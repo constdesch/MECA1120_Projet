@@ -8,7 +8,42 @@
  *
  */
 
+
 #include "fem.h"
+
+/* ===================== ADDED FUNCTIONS ==================== */
+double area (double xa, double xb, double xc, double ya, double yb, double yc){
+    return 1 /2 * fabs( (xb - xa)*(yc - ya) - (xc - xa)*(yb - ya) );
+}
+
+void ComputeArea (femPoissonProblem *theProblem){
+    femMesh *theMesh = theProblem->mesh;
+    int elem;
+    int map[3];
+    double x[3], y[3];
+    for (elem=0; elem<theMesh->nElem;elem++){
+        femMeshLocal(theMesh, elem, map, x, y);
+        double xa = x[0], xb = x[1], xc = x[2];
+        double ya = y[0], yb = y[1], yc = y[2];
+        theProblem->area[elem] = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
+    }
+}
+int WithinTriangle(double *x, double *y, double xc, double yc, double Aire) {
+    double aire1 = 1 / 2 * area(xc, x[1],x[2],yc,y[1],y[2]);
+    double aire2 = 1 / 2 * area(x[0],xc,x[2],y[0],yc,y[2]);
+    double aire3 = 1 / 2 * area(x[0],x[1],xc,y[0],y[1],yc);
+    double s = aire1 + aire2 + aire3;
+    return (Aire == s);
+}
+void invefctforme(femPoissonProblem *theProblem, double xx, double yy, double *x, double *y, double *tau) {
+    double *tab = malloc(sizeof(double) * 2);
+    tab[0] = ((xx - x[0])*(y[2] - y[0]) - (yy - y[0])*(x[2] - x[0])) / ((x[1] - x[0])*(y[2] - y[0]) - (y[1] - y[0])*(x[2] - x[0]));
+    tab[1] = ((xx - x[0])*(y[0] - y[1]) - (yy - y[0])*(x[0] - x[1])) / ((x[1] - x[0])*(y[2] - y[0]) - (y[1] - y[0])*(x[2] - x[0]));
+    femDiscretePhi2(theProblem->space, tab[0], tab[1], tau);
+    free(tab);
+}
+
+/* ======================== GRAINS & POISSON ======================= */
 
 static const double _gaussQuad4Xsi[4] = { -0.577350269189626,-0.577350269189626, 0.577350269189626, 0.577350269189626 };
 static const double _gaussQuad4Eta[4] = { 0.577350269189626,-0.577350269189626,-0.577350269189626, 0.577350269189626 };

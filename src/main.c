@@ -20,17 +20,13 @@ int main(void)
     double mass = 0.1;
     double radiusIn = 0.4;
     double radiusOut = 2.0;
-    double vext = 5;
     double dt = 0.05;
     double tEnd = 5.0;
     double tol = 1e-6;
     double t = 0;
     double iterMax = 100;
     double gamma = 0.6;
-    double mu = 1e-3; //1.8e-3;
-    
-    int i;
-    
+
     femPoissonProblem* theProblemu = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
     femPoissonProblem* theProblemv = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
     
