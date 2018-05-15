@@ -35,8 +35,7 @@ int main(void)
     femPoissonProblem* theProblemv = femPoissonCreate("../data/meca1120-projet-meshMedium.txt");
     
     femGrains* theGrains = femGrainsCreateSimple(n, radius, mass, radiusIn, radiusOut, gamma);
-    femPoissonSolveu(theProblemu, radiusIn, radiusOut, vext, mu, theGrains);
-    femPoissonSolvev(theProblemv, radiusIn, radiusOut, vext, mu, theGrains);
+    femPoissonSolve(theProblemu, theProblemv, theGrains);
     
     
     double* norme = malloc(sizeof(double)*theProblemu->mesh->nNode);
@@ -80,8 +79,8 @@ int main(void)
             femGrainsUpdate(theGrains, dt, tol, iterMax, theProblemu, theProblemv);
             femFullSystemInit(theProblemu->system);
             femFullSystemInit(theProblemv->system);
-            femPoissonSolveu(theProblemu, radiusIn, radiusOut, vext, mu, theGrains);
-            femPoissonSolvev(theProblemv, radiusIn, radiusOut, vext, mu, theGrains);
+            femPoissonSolve(theProblemu, theProblemv, theGrains);
+
             t += dt; }
         
         while ( glfwGetTime()-currentTime < theVelocityFactor ) {

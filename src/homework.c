@@ -1,7 +1,25 @@
 //Lac Adlane & Roelandts Antoine
 #include"fem.h"
 
-double DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
+
+double area (double xa, double xb, double xc, double ya, double yb, double yc){
+    return 1 /2 * fabs( (xb - xa)*(yc - ya) - (xc - xa)*(yb - ya) );
+}
+
+void ComputeArea (femPoissonProblem *theProblem){
+    femMesh *theMesh = theProblem->mesh;
+    int elem;
+    int map[3];
+    double x[3], y[3];
+    for (elem=0; elem<theMesh->nElem;elem++){
+        femMeshLocal(theMesh, elem, map, x, y);
+        double xa = x[0], xb = x[1], xc = x[2];
+        double ya = y[0], yb = y[1], yc = y[2];
+        theMesh->area[elem] = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
+    }
+}
+
+int DeltaPointTriangle(double xa, double ya, double xb, double yb, double xc, double yc, double xp, double yp)
 {
     
     double ABC = 1 / 2 * fabs((xb - xa)*(yc - ya) - (xc - xa)*(yb - ya));
@@ -232,6 +250,8 @@ femPoissonProblem *femPoissonCreate(const char *filename)
         theProblem->rule = femIntegrationCreate(3, FEM_TRIANGLE);
     }
     theProblem->system = femFullSystemCreate(theProblem->mesh->nNode);
+    theProblem->area = malloc(sizeof(double)*theProblem->mesh->nElem);
+    ComputeArea(theProblem);
     return theProblem;
 }
 # endif
@@ -244,6 +264,7 @@ void femPoissonFree(femPoissonProblem *theProblem)
     femDiscreteFree(theProblem->space);
     femEdgesFree(theProblem->edges);
     femMeshFree(theProblem->mesh);
+    free(theProblem->area);
     free(theProblem);
 }
 
@@ -265,13 +286,20 @@ void femMeshLocal(const femMesh *theMesh, const int iElem, int *map, double *x, 
 # endif
 # ifndef NOPOISSONSOLVE
 
-void femPoissonSolveu(femPoissonProblem *theProblem, double radiusIn, double radiusOut, double vext, double mu, femGrains *myGrains)
+void femPoissonSolve(femPoissonProblem *theProblemU,femPoissonProblem *theProblemV, femGrains *myGrains)
 {
-    femMesh *theMesh = theProblem->mesh;
-    femEdges *theEdges = theProblem->edges;
-    femFullSystem *theSystem = theProblem->system;
-    femIntegration *theRule = theProblem->rule;
-    femDiscrete *theSpace = theProblem->space;
+    femMesh *theMesh = theProblemU->mesh;
+    femEdges *theEdges = theProblemU->edges;
+    femIntegration *theRule = theProblemU->rule;
+    femDiscrete *theSpace = theProblemU->space;
+    
+    femFullSystem *theSystemU = theProblemU->system;
+    femFullSystem *theSystemV = theProblemV->system;
+    
+    double vext = 5.0;
+    double radiusIn = myGrains->radiusIn;
+    double radiusOut= myGrains->radiusOut;
+    double mu = 1e-1;
     double *xg = myGrains->x;
     double *yg = myGrains->y;
     double *m = myGrains->m;
@@ -288,7 +316,7 @@ void femPoissonSolveu(femPoissonProblem *theProblem, double radiusIn, double rad
     
     for (iElem = 0; iElem < theMesh->nElem; iElem++) {
         femMeshLocal(theMesh, iElem, map, x, y);
-        
+        double area = theProblemU->area[iElem];
         
         for (iInteg = 0; iInteg < theRule->n; iInteg++) {
             double xsi = theRule->xsi[iInteg];
@@ -316,13 +344,10 @@ void femPoissonSolveu(femPoissonProblem *theProblem, double radiusIn, double rad
                 dphidy[i] = (dphideta[i] * dxdxsi - dphidxsi[i] * dxdeta) / jac;
             }
             
-            
-            
-            
-            
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
-                    theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight*mu;
+                    theSystemU->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight*mu;
+                    theSystemV->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight*mu;
                 }
             }
         }
@@ -331,9 +356,11 @@ void femPoissonSolveu(femPoissonProblem *theProblem, double radiusIn, double rad
             invtau(xg[k], yg[k], x[0], y[0], x[1], y[1], x[2], y[2], tauetoile);
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
-                    theSystem->A[map[i]][map[j]] += DeltaPointTriangle(x[0], y[0], x[1], y[1], x[2], y[2], xg[k], yg[k])*gamma*tauetoile[i] * tauetoile[j];
+                    theSystemU->A[map[i]][map[j]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma*tauetoile[i] * tauetoile[j];
+                    theSystemV->A[map[i]][map[j]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma*tauetoile[i] * tauetoile[j];
                 }
-                theSystem->B[map[i]] += DeltaPointTriangle(x[0], y[0], x[1], y[1], x[2], y[2], xg[k], yg[k])*gamma * tauetoile[i] * vx[k];
+                theSystemU->B[map[i]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma * tauetoile[i] * vx[k];
+                theSystemV->B[map[i]] += DeltaPointTriangle(x[0], x[1], x[2], y[0], y[1],y[2], xg[k], yg[k])*gamma * tauetoile[i] * vy[k];
                 
             }
         }
@@ -346,118 +373,24 @@ void femPoissonSolveu(femPoissonProblem *theProblem, double radiusIn, double rad
                 double xloc = theMesh->X[iNode];
                 double yloc = theMesh->Y[iNode];
                 double rMid = (radiusIn + radiusOut)/2;
-                if (pow(xloc*xloc + yloc * yloc, 0.5) < rMid)
-                    femFullSystemConstrain(theSystem, iNode, 0.0);
-                else
-                    femFullSystemConstrain(theSystem, iNode, yloc*vext/radiusOut);
-                
+                if ( sqrt(xloc*xloc + yloc * yloc) < rMid){
+                    femFullSystemConstrain(theSystemU, iNode, 0.0);
+                    femFullSystemConstrain(theSystemV, iNode, 0.0);}
+                else{
+                    femFullSystemConstrain(theSystemU, iNode, yloc*vext/radiusOut);
+                    femFullSystemConstrain(theSystemV, iNode, -xloc*vext/radiusOut);}
             }
         }
     }
     
-    femFullSystemEliminate(theSystem);
+    femFullSystemEliminate(theSystemU);
+    femFullSystemEliminate(theSystemV);
 }
+
 
 
 # endif
 
-# ifndef NOPOISSONSOLVE
-
-void femPoissonSolvev(femPoissonProblem *theProblem, double radiusIn, double radiusOut, double vext, double mu, femGrains *myGrains)
-{
-    femMesh *theMesh = theProblem->mesh;
-    femEdges *theEdges = theProblem->edges;
-    femFullSystem *theSystem = theProblem->system;
-    femIntegration *theRule = theProblem->rule;
-    femDiscrete *theSpace = theProblem->space;
-    double *xg = myGrains->x;
-    double *yg = myGrains->y;
-    double *m = myGrains->m;
-    double *vy = myGrains->vy;
-    double *vx = myGrains->vx;
-    int nGrains = myGrains->n;
-    double gamma = myGrains->gamma;
-    
-    double x[3], y[3], phi[3], dphidxsi[3], dphideta[3], dphidx[3], dphidy[3], tauetoile[3];
-    int iElem, iInteg, iEdge, i, j, k, map[3];
-    
-    
-    
-    
-    for (iElem = 0; iElem < theMesh->nElem; iElem++) {
-        femMeshLocal(theMesh, iElem, map, x, y);
-        
-        
-        
-        for (iInteg = 0; iInteg < theRule->n; iInteg++) {
-            double xsi = theRule->xsi[iInteg];
-            double eta = theRule->eta[iInteg];
-            double weight = theRule->weight[iInteg];
-            femDiscretePhi2(theSpace, xsi, eta, phi);
-            femDiscreteDphi2(theSpace, xsi, eta, dphidxsi, dphideta);
-            double dxdxsi = 0;
-            double dxdeta = 0;
-            double dydxsi = 0;
-            double dydeta = 0;
-            double xloc = 0;
-            double yloc = 0;
-            for (i = 0; i < 3; i++) {
-                xloc += x[i] * phi[i];
-                yloc += y[i] * phi[i];
-                dxdxsi += x[i] * dphidxsi[i];
-                dxdeta += x[i] * dphideta[i];
-                dydxsi += y[i] * dphidxsi[i];
-                dydeta += y[i] * dphideta[i];
-            }
-            double jac = fabs(dxdxsi * dydeta - dxdeta * dydxsi);
-            for (i = 0; i < 3; i++) {
-                dphidx[i] = (dphidxsi[i] * dydeta - dphideta[i] * dydxsi) / jac;
-                dphidy[i] = (dphideta[i] * dxdxsi - dphidxsi[i] * dxdeta) / jac;
-            }
-            
-            
-            
-            
-            
-            for (i = 0; i < 3; i++) {
-                for (j = 0; j < 3; j++) {
-                    theSystem->A[map[i]][map[j]] += (dphidx[i] * dphidx[j] + dphidy[i] * dphidy[j]) * jac * weight*mu;
-                }
-            }
-        }
-        
-        for (k = 0; k < nGrains; k++) {
-            invtau(xg[k], yg[k], x[0], y[0], x[1], y[1], x[2], y[2], tauetoile);
-            for (i = 0; i < 3; i++) {
-                for (j = 0; j < 3; j++) {
-                    theSystem->A[map[i]][map[j]] += DeltaPointTriangle(x[0], y[0], x[1], y[1], x[2], y[2], xg[k], yg[k])*gamma*tauetoile[i] * tauetoile[j];
-                }
-                theSystem->B[map[i]] += DeltaPointTriangle(x[0], y[0], x[1], y[1], x[2], y[2], xg[k], yg[k])*gamma * tauetoile[i] * vy[k];
-                
-            }
-        }
-    }
-    
-    
-    for (iEdge = 0; iEdge < theEdges->nEdge; iEdge++) {
-        if (theEdges->edges[iEdge].elem[1] < 0) {
-            for (i = 0; i < 2; i++) {
-                int iNode = theEdges->edges[iEdge].node[i];
-                double xloc = theMesh->X[iNode];
-                double yloc = theMesh->Y[iNode];
-                double rMid = (radiusIn + radiusOut) / 2;
-                if (pow(xloc*xloc + yloc * yloc, 0.5) < rMid)
-                    femFullSystemConstrain(theSystem, iNode, 0.0);
-                else
-                    femFullSystemConstrain(theSystem, iNode, -xloc*vext / radiusOut);
-                
-            }
-        }
-    }
-    
-    femFullSystemEliminate(theSystem);
-}
-# endif
 
 
 
